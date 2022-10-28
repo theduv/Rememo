@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div>
       <Header title={"Decks list"} />
-      <div className="h-full border p-8 my-auto text-center flex flex-col justify-center items-center">
+      <div className="h-full p-8 my-auto text-center flex flex-col justify-center items-center">
         <DecksList decks={decks} />
       </div>
     </div>

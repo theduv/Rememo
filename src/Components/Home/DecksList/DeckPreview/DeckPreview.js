@@ -6,7 +6,7 @@ const DeckPreview = ({ deck }) => {
     <Link to={`/deck/${deck.id}`}>
       <button
         data-tip={deck.name}
-        className="w-64 overflow-ellipsis bg-gray-600 text-white text-4xl rounded-lg px-4 py-2"
+        className="w-64 overflow-ellipsis bg-gray-600 text-white text-2xl rounded-lg px-4 py-2"
       >
         {deck.name}
       </button>

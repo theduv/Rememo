@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Header = ({ title }) => {
   return (
-    <div className="flex justify-between  items-center bg-gray-600 text-white px-4 py-2 mb-12">
-      <div className="flex space-x-5 items-center">
+    <div className="flex items-center bg-gray-600 text-white px-4 py-2 mb-12">
+      <div className="flex-1 flex space-x-5 items-center mr-auto">
         <Link to="/">
           <h1 className="text-3xl">ɘЯmemo</h1>
         </Link>
@@ -20,7 +20,7 @@ const Header = ({ title }) => {
       <div>
         <h1 className="text-xl">{title}</h1>
       </div>
-      <div></div>
+      <div className="flex-1 ml-auto"></div>
     </div>
   );
 };

@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import DeckPreview from "./DeckPreview/DeckPreview";
 
 const DecksList = ({ decks }) => {
   return (
-    <div className="grid grid-cols-4 gap-y-6 items-center justify-center">
+    <div className="flex justify-center items-center">
       {decks.map((deck) => (
         <DeckPreview deck={deck} />
       ))}

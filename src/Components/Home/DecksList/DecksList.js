@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import DeckPreview from "./DeckPreview/DeckPreview";
 
 const DecksList = ({ decks }) => {

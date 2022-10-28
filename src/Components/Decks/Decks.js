@@ -9,10 +9,6 @@ const Decks = () => {
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
-    console.log(decks);
-  }, [decks]);
-
-  useEffect(() => {
     const data = fs.readFileSync("src/data/decks.json", "utf8");
     setDecks(JSON.parse(data));
   }, []);

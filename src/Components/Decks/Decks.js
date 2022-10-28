@@ -15,7 +15,7 @@ const Decks = () => {
 
   return (
     <div>
-      <Header />
+      <Header title={"Decks list"} />
       <div className="flex flex-col items-center space-y-8">
         <CreateBar decks={decks} setDecks={setDecks} />
         {decks.length ? (

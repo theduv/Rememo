@@ -3,7 +3,7 @@ import DeckPreview from "./DeckPreview/DeckPreview";
 
 const DecksList = ({ decks }) => {
   return (
-    <div className="flex justify-center items-center space-x-4">
+    <div className="flex flex-col justify-center items-center space-y-4">
       {decks.map((deck) => (
         <DeckPreview deck={deck} />
       ))}

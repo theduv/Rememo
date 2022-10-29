@@ -1,4 +1,4 @@
-import { Delete, XCircle } from "react-feather";
+import { XCircle } from "react-feather";
 
 const CardsList = ({ cards }) => {
   return (

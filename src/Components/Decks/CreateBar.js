@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useState } from "react";
 import { Plus } from "react-feather";
 import { v4 as uuid } from "uuid";

@@ -20,7 +20,7 @@ const SingleDeck = () => {
 
   return (
     <div>
-      <Header title={deckData.title} />
+      <Header title={deckData.name} />
       <div className="p-8 min-h-full">
         <div className="flex flex-col space-y-12 items-center justify-center ">
           {currentCard < deckData.cards.length ? (

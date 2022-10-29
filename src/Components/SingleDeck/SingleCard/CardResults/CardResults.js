@@ -1,4 +1,4 @@
-import { CheckCircle, Crosshair, X, XCircle } from "react-feather";
+import { CheckCircle, XCircle } from "react-feather";
 
 const CardResults = ({ onClickResult, clickedShow }) => {
   const onClickButton = () => {

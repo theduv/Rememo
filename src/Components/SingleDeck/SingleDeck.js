@@ -15,9 +15,11 @@ const SingleDeck = () => {
   const params = useParams();
   const deckID = params.id;
   const deckData = getDeckData(deckID);
-  const shuffledDeck = deckData.cards.sort(() => 0.5 - Math.random());
+  console.log(deckData.cards);
+  const shuffledDeck = deckData.cards.sort((a, b) => 0.5 - Math.random());
   const [currentCard, setCurrentCard] = useState(0);
 
+  console.log(deckData.cards);
   return (
     <div>
       <Header title={deckData.name} />
@@ -29,7 +31,7 @@ const SingleDeck = () => {
               setCurrentCard={setCurrentCard}
             />
           ) : (
-            <DeckDone />
+            <DeckDone setCurrentCard={setCurrentCard} />
           )}
         </div>
       </div>

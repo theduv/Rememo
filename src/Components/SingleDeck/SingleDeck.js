@@ -22,7 +22,7 @@ const SingleDeck = () => {
     <div>
       <Header title={deckData.name} />
       <div className="p-8 min-h-full">
-        <div className="flex flex-col space-y-12 items-center justify-center ">
+        <div className="flex flex-col space-y-12 items-center justify-center h-full">
           {currentCard < deckData.cards.length ? (
             <SingleCard
               cardData={shuffledDeck[currentCard]}

@@ -14,16 +14,17 @@ const SingleCard = ({ cardData, setCurrentCard }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-4 items-center w-full">
-      <div className="border-2 rounded-lg p-6 w-1/6 flex flex-col items-center space-y-8">
-        <h1>{cardData.front}</h1>
-        <div className="border w-full border-gray-700" />
-        {!clickedShow && (
-          <button onClick={onClickShow} className="italic">
+    <div className="flex flex-col space-y-4 items-center w-full h-full">
+      <div className="border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96">
+        <h1 className="m-auto text-3xl">{cardData.front}</h1>
+        <div className="border w-full border-gray-300" />
+        {clickedShow ? (
+          <h1 className="m-auto text-3xl">{cardData.back}</h1>
+        ) : (
+          <button onClick={onClickShow} className="italic text-3xl">
             Show answer
           </button>
         )}
-        {clickedShow && <h1>{cardData.back}</h1>}
       </div>
       <Results onClickResult={onClickResult} clickedShow={clickedShow} />
     </div>

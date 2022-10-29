@@ -1,26 +1,28 @@
 import { CheckCircle, XCircle } from "react-feather";
 
 const CardResults = ({ onClickResult, clickedShow }) => {
-  const onClickButton = () => {
+  const onClickCorrect = () => {
+    onClickResult((oldCard) => oldCard + 1);
+  };
+
+  const onClickIncorrect = () => {
     onClickResult((oldCard) => oldCard + 1);
   };
 
   return (
     <div className="flex space-x-12 justify-center">
-      <button
-        onClick={onClickButton}
-        disabled={!clickedShow}
-        className="text-gray-600 rounded-lg  text-sm"
-      >
-        <XCircle />
-      </button>
-      <button
-        onClick={onClickButton}
-        disabled={!clickedShow}
-        className="text-gray-600 rounded-lg  text-sm"
-      >
-        <CheckCircle />
-      </button>
+      <XCircle
+        onClick={onClickIncorrect}
+        width={32}
+        height={32}
+        className="text-gray-500"
+      />
+      <CheckCircle
+        onClick={onClickCorrect}
+        width={32}
+        height={32}
+        className="text-gray-500"
+      />
     </div>
   );
 };

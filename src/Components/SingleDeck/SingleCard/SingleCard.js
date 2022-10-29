@@ -21,7 +21,7 @@ const SingleCard = ({ cardData, setCurrentCard }) => {
         {clickedShow ? (
           <h1 className="m-auto text-3xl">{cardData.back}</h1>
         ) : (
-          <button onClick={onClickShow} className="italic text-3xl">
+          <button onClick={onClickShow} className="m-auto italic text-3xl">
             Show answer
           </button>
         )}

@@ -15,13 +15,13 @@ const CardResults = ({ onClickResult, clickedShow }) => {
         onClick={onClickIncorrect}
         width={32}
         height={32}
-        className="text-gray-500"
+        className="text-gray-500 cursor-pointer"
       />
       <CheckCircle
         onClick={onClickCorrect}
         width={32}
         height={32}
-        className="text-gray-500"
+        className="text-gray-500 cursor-pointer"
       />
     </div>
   );

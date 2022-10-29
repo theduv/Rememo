@@ -1,9 +1,10 @@
-const path = require('path');
-const { app, BrowserWindow } = require('electron');
-const isDev = require('electron-is-dev');
+const path = require("path");
+const { app, BrowserWindow } = require("electron");
+const isDev = require("electron-is-dev");
 
 function createWindow() {
   const win = new BrowserWindow({
+    icon: __dirname + "/favicon.ico",
     width: 800,
     height: 600,
     webPreferences: {
@@ -15,23 +16,23 @@ function createWindow() {
 
   win.loadURL(
     isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
+      ? "http://localhost:3000"
+      : `file://${path.join(__dirname, "../build/index.html")}`
   );
   if (isDev) {
-    win.webContents.openDevTools({ mode: 'detach' });
+    win.webContents.openDevTools({ mode: "detach" });
   }
 }
 
 app.whenReady().then(createWindow);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }

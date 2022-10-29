@@ -1,6 +1,20 @@
 import { XCircle } from "react-feather";
+const fs = window.require("fs");
 
-const CardsList = ({ cards }) => {
+const CardsList = ({ cards, setCards, deckData }) => {
+  const onClickDelete = (card) => {
+    const data = fs.readFileSync("src/data/decks.json", "utf8");
+    const parsedData = JSON.parse(data);
+    const targetDeck = parsedData.find((deck) => deck.id === deckData.id);
+    const targetCards = targetDeck.cards;
+    const newCards = targetCards.filter(
+      (curCard) => curCard.front !== card.front && curCard.back !== card.back
+    );
+    targetDeck.cards = newCards;
+    setCards(newCards);
+    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
+  };
+
   return (
     <div className="flex items-center justify-center mt-8 max-w-1/4">
       <div className="grid grid-cols-3 gap-x-32 gap-y-4 items-center">
@@ -11,7 +25,10 @@ const CardsList = ({ cards }) => {
           <>
             <div className="py-1 px-3 rounded-lg">{card.front}</div>
             <div className="py-1 px-3 rounded-lg">{card.back}</div>
-            <div className="text-gray-500 cursor-pointer" onClick={() => {}}>
+            <div
+              className="text-gray-500 cursor-pointer"
+              onClick={() => onClickDelete(card)}
+            >
               <XCircle />
             </div>
           </>

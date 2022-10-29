@@ -22,7 +22,7 @@ const SingleDeckSettings = () => {
       <Header title={`Edit ${deckData.name}`} />
       <div className="flex flex-col">
         <AddCardBar setCards={setCards} deckData={deckData} />
-        <CardsList cards={cards} />
+        <CardsList cards={cards} setCards={setCards} deckData={deckData} />
       </div>
     </div>
   );

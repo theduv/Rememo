@@ -9,6 +9,7 @@
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
     "electron-json-storage": "^4.6.0",
+    "electron-packager": "^17.0.0",
     "electron-storage": "^1.0.7",
     "electron-store": "^8.1.0",
     "fs": "^0.0.1-security",

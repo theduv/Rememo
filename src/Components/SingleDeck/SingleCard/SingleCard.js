@@ -14,7 +14,7 @@ const SingleCard = ({ cardData, setCurrentCard }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-4 items-center w-full h-full">
+    <div className="flex flex-col space-y-12 items-center w-full h-full">
       <div className="border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96">
         <h1 className="m-auto text-3xl">{cardData.front}</h1>
         <div className="border w-full border-gray-300" />

@@ -18,9 +18,9 @@ const SingleDeckSettings = () => {
   const [cards, setCards] = useState(deckData.cards);
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center ">
       <Header title={`Edit ${deckData.name}`} />
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         <AddCardBar setCards={setCards} deckData={deckData} />
         <CardsList cards={cards} setCards={setCards} deckData={deckData} />
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Header from "../Header/Header";
 import DeckDone from "./DeckDone/DeckDone";
@@ -15,11 +15,17 @@ const SingleDeck = () => {
   const params = useParams();
   const deckID = params.id;
   const deckData = getDeckData(deckID);
-  console.log(deckData.cards);
-  const shuffledDeck = deckData.cards.sort((a, b) => 0.5 - Math.random());
+  const deckCards = [...deckData.cards];
+  const [shuffledDeck, setShuffledDeck] = useState(
+    deckCards.sort((a, b) => 0.5 - Math.random())
+  );
   const [currentCard, setCurrentCard] = useState(0);
 
-  console.log(deckData.cards);
+  useEffect(() => {
+    console.log(shuffledDeck);
+    console.log("card", shuffledDeck[currentCard]);
+    console.log("currentCard", currentCard);
+  }, [currentCard]);
   return (
     <div>
       <Header title={deckData.name} />

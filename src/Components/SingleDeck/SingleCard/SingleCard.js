@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Results from "./CardResults/CardResults";
 
-const SingleCard = ({ cardData, setCurrentCard }) => {
+const SingleCard = ({ cardData, setCurrentCard, deckData }) => {
   const [clickedShow, setClickedShow] = useState(false);
 
   const onClickShow = () => {
@@ -26,7 +26,12 @@ const SingleCard = ({ cardData, setCurrentCard }) => {
           </button>
         )}
       </div>
-      <Results onClickResult={onClickResult} clickedShow={clickedShow} />
+      <Results
+        onClickResult={onClickResult}
+        clickedShow={clickedShow}
+        deckData={deckData}
+        cardData={cardData}
+      />
     </div>
   );
 };

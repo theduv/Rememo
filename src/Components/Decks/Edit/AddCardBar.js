@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Check } from "react-feather";
+import { uuid as v4 } from "uuidv4";
 const fs = window.require("fs");
 
 const AddCardBar = ({ setCards, deckData }) => {
@@ -13,7 +14,7 @@ const AddCardBar = ({ setCards, deckData }) => {
 
     const newCards = [
       ...deckData.cards,
-      { front: frontValue, back: backValue },
+      { front: frontValue, back: backValue, id: v4() },
     ];
     setCards(newCards);
     oldDeckData.cards = newCards;

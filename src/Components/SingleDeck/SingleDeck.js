@@ -24,11 +24,19 @@ const SingleDeck = () => {
   const deckID = params.id;
   const deckData = getDeckData(deckID);
   const deckCards = [...deckData.cards];
+  const [currentResults, setCurrentResults] = useState({
+    right: 0,
+    wrong: 0,
+  });
   const [workSelected, setWorkSelected] = useState("none");
   const [shuffledDeck, setShuffledDeck] = useState(
     deckCards.sort((a, b) => 0.5 - Math.random())
   );
   const [currentCard, setCurrentCard] = useState(0);
+
+  useEffect(() => {
+    console.log(currentCard);
+  }, [currentCard]);
 
   useEffect(() => {
     const targetCards = getWorkCards(workSelected, deckCards);
@@ -44,12 +52,17 @@ const SingleDeck = () => {
             <WorkSelect cards={deckCards} setWorkSelected={setWorkSelected} />
           ) : currentCard < shuffledDeck.length && shuffledDeck.length ? (
             <SingleCard
+              setCurrentResults={setCurrentResults}
               deckData={deckData}
               cardData={shuffledDeck[currentCard]}
               setCurrentCard={setCurrentCard}
             />
           ) : (
-            <DeckDone setCurrentCard={setCurrentCard} />
+            <DeckDone
+              setCurrentCard={setCurrentCard}
+              currentResults={currentResults}
+              setCurrentResults={setCurrentResults}
+            />
           )}
         </div>
       </div>

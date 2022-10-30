@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Results from "./CardResults/CardResults";
 
-const SingleCard = ({ cardData, setCurrentCard, deckData }) => {
+const SingleCard = ({
+  cardData,
+  setCurrentCard,
+  deckData,
+  setCurrentResults,
+}) => {
   const [clickedShow, setClickedShow] = useState(false);
 
   const onClickShow = () => {
@@ -27,6 +32,7 @@ const SingleCard = ({ cardData, setCurrentCard, deckData }) => {
         )}
       </div>
       <Results
+        setCurrentResults={setCurrentResults}
         onClickResult={onClickResult}
         clickedShow={clickedShow}
         deckData={deckData}

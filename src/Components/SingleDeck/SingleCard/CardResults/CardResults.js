@@ -1,10 +1,21 @@
-import clsx from "clsx";
 import { CheckCircle, XCircle } from "react-feather";
 const fs = window.require("fs");
 
-const CardResults = ({ onClickResult, clickedShow, deckData, cardData }) => {
+const CardResults = ({
+  onClickResult,
+  clickedShow,
+  deckData,
+  cardData,
+  setCurrentResults,
+}) => {
   const onClickCorrect = () => {
     if (!clickedShow) return;
+
+    setCurrentResults((oldResults) => ({
+      ...oldResults,
+      right: oldResults.right + 1,
+    }));
+
     const data = fs.readFileSync("src/data/decks.json");
     const parsedDecks = JSON.parse(data);
     const targetDeck = parsedDecks.find((deck) => deck.id === deckData.id);
@@ -12,11 +23,17 @@ const CardResults = ({ onClickResult, clickedShow, deckData, cardData }) => {
     targetCard.lastResult = "right";
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
 
-    onClickResult((oldCard) => oldCard + 1);
+    onClickResult();
   };
 
   const onClickIncorrect = () => {
     if (!clickedShow) return;
+
+    setCurrentResults((oldResults) => ({
+      ...oldResults,
+      wrong: oldResults.wrong + 1,
+    }));
+
     const data = fs.readFileSync("src/data/decks.json");
     const parsedDecks = JSON.parse(data);
     const targetDeck = parsedDecks.find((deck) => deck.id === deckData.id);
@@ -24,7 +41,7 @@ const CardResults = ({ onClickResult, clickedShow, deckData, cardData }) => {
     targetCard.lastResult = "wrong";
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
 
-    onClickResult((oldCard) => oldCard + 1);
+    onClickResult();
   };
 
   return (

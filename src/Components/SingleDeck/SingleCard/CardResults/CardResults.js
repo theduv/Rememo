@@ -1,12 +1,13 @@
+import clsx from "clsx";
 import { CheckCircle, XCircle } from "react-feather";
 
 const CardResults = ({ onClickResult, clickedShow }) => {
   const onClickCorrect = () => {
-    onClickResult((oldCard) => oldCard + 1);
+    if (clickedShow) onClickResult((oldCard) => oldCard + 1);
   };
 
   const onClickIncorrect = () => {
-    onClickResult((oldCard) => oldCard + 1);
+    if (clickedShow) onClickResult((oldCard) => oldCard + 1);
   };
 
   return (

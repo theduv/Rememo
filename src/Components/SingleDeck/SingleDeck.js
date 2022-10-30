@@ -21,11 +21,6 @@ const SingleDeck = () => {
   );
   const [currentCard, setCurrentCard] = useState(0);
 
-  useEffect(() => {
-    console.log(shuffledDeck);
-    console.log("card", shuffledDeck[currentCard]);
-    console.log("currentCard", currentCard);
-  }, [currentCard]);
   return (
     <div>
       <Header title={deckData.name} />

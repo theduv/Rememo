@@ -1,1 +1,38 @@
-[{"id":"7f1a5ce2-1b59-4b71-b305-ab7ea80cf878","name":"Norvégien","numberOfCards":32,"cards":[{"front":"Où","back":"Hvor"},{"front":"Être (présent)","back":"Er"},{"front":"Tu","back":"Du"},{"front":"Je","back":"Jeg"},{"front":"Nous","back":"Vi"},{"front":"Ici","back":"Her"},{"front":"Forêt","back":"Skogen"},{"front":"Ça, il \"impersonnel\" ","back":"Det"},{"front":"Seulement","back":"Bare"},{"front":"Un élan","back":"En elg"},{"front":"Dans, en","back":"I"},{"front":"Mais","back":"Men"},{"front":"Un arbre","back":"Et tre"},{"front":"Que, quoi","back":"Hva"},{"front":"Neige","back":"Snø"},{"front":"Encore","back":"Igjen"},{"front":"Maintenant","back":"Nå"},{"front":"Dire (présent)","back":"Sier"},{"front":"Neiger (présent)","back":"(Det) snør"},{"front":"Zut!","back":"Uff!"},{"front":"Avec","back":"Med"},{"front":"Non","back":"Nei"},{"front":"Alors","back":"Da"},{"front":"Froid","back":"Kaldt"},{"front":"Désagréable","back":"Ufyselig"},{"front":"Bizarre","back":"Rar(t)"},{"front":"Pas","back":"Ikke"},{"front":"Vrai","back":"Riktig"},{"front":"Norvégien","back":"Nordmann"}]}]
+[
+  {
+    "id": "7f1a5ce2-1b59-4b71-b305-ab7ea80cf878",
+    "name": "Norvégien",
+    "numberOfCards": 29,
+    "cards": [
+      { "front": "Où", "back": "Hvor" },
+      { "front": "Être (présent)", "back": "Er" },
+      { "front": "Tu", "back": "Du" },
+      { "front": "Je", "back": "Jeg" },
+      { "front": "Nous", "back": "Vi" },
+      { "front": "Ici", "back": "Her" },
+      { "front": "Forêt", "back": "Skogen" },
+      { "front": "Ça, il \"impersonnel\" ", "back": "Det" },
+      { "front": "Seulement", "back": "Bare" },
+      { "front": "Un élan", "back": "En elg" },
+      { "front": "Dans, en", "back": "I" },
+      { "front": "Mais", "back": "Men" },
+      { "front": "Un arbre", "back": "Et tre" },
+      { "front": "Que, quoi", "back": "Hva" },
+      { "front": "Neige", "back": "Snø" },
+      { "front": "Encore", "back": "Igjen" },
+      { "front": "Maintenant", "back": "Nå" },
+      { "front": "Dire (présent)", "back": "Sier" },
+      { "front": "Neiger (présent)", "back": "(Det) snør" },
+      { "front": "Zut!", "back": "Uff!" },
+      { "front": "Avec", "back": "Med" },
+      { "front": "Non", "back": "Nei" },
+      { "front": "Alors", "back": "Da" },
+      { "front": "Froid", "back": "Kaldt" },
+      { "front": "Désagréable", "back": "Ufyselig" },
+      { "front": "Bizarre", "back": "Rar(t)" },
+      { "front": "Pas", "back": "Ikke" },
+      { "front": "Vrai", "back": "Riktig" },
+      { "front": "Norvégien", "back": "Nordmann" }
+    ]
+  }
+]

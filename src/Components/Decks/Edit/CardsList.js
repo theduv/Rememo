@@ -1,7 +1,7 @@
 import { XCircle } from "react-feather";
 const fs = window.require("fs");
 
-const CardsList = ({ cards, setCards, deckData }) => {
+const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
   const onClickDelete = (card) => {
     const data = fs.readFileSync("src/data/decks.json", "utf8");
     const parsedData = JSON.parse(data);
@@ -22,18 +22,24 @@ const CardsList = ({ cards, setCards, deckData }) => {
         <h1 className="py-2 px-4 italic text-lg rounded-lg font-bold">Front</h1>
         <h1 className="py-2 px-4 italic text-lg rounded-lg font-bold">Back</h1>
         <div></div>
-        {cards.map((card) => (
-          <>
-            <div className="py-1 px-3 rounded-lg">{card.front}</div>
-            <div className="py-1 px-3 rounded-lg">{card.back}</div>
-            <div
-              className="text-gray-500 cursor-pointer"
-              onClick={() => onClickDelete(card)}
-            >
-              <XCircle />
-            </div>
-          </>
-        ))}
+        {cards
+          .filter(
+            (card) =>
+              card.front.toLowerCase().includes(valueSearch.toLowerCase()) ||
+              card.back.toLowerCase().includes(valueSearch.toLowerCase())
+          )
+          .map((card) => (
+            <>
+              <div className="py-1 px-3 rounded-lg">{card.front}</div>
+              <div className="py-1 px-3 rounded-lg">{card.back}</div>
+              <div
+                className="text-gray-500 cursor-pointer"
+                onClick={() => onClickDelete(card)}
+              >
+                <XCircle />
+              </div>
+            </>
+          ))}
       </div>
     </div>
   );

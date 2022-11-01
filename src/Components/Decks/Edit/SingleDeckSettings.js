@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Header from "../../Header/Header";
 import AddCardBar from "./AddCardBar";
 import CardsList from "./CardsList";
+import SearchCardBar from "./SearchCardBar";
 const fs = window.require("fs");
 
 const getDeckData = (id) => {
@@ -15,14 +16,24 @@ const SingleDeckSettings = () => {
   const params = useParams();
   const deckID = params.id;
   const deckData = getDeckData(deckID);
+  const [valueSearch, setValueSearch] = useState("");
   const [cards, setCards] = useState(deckData.cards);
 
   return (
     <div className="flex flex-col justify-center ">
       <Header title={`Edit ${deckData.name}`} />
-      <div className="flex flex-col ">
+      <div className="flex flex-col space-y-4">
+        <SearchCardBar
+          valueSearch={valueSearch}
+          setValueSearch={setValueSearch}
+        />
         <AddCardBar setCards={setCards} deckData={deckData} />
-        <CardsList cards={cards} setCards={setCards} deckData={deckData} />
+        <CardsList
+          valueSearch={valueSearch}
+          cards={cards}
+          setCards={setCards}
+          deckData={deckData}
+        />
       </div>
     </div>
   );

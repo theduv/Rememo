@@ -38,7 +38,7 @@ const SingleDeck = () => {
   const [currentCard, setCurrentCard] = useState(0);
 
   useEffect(() => {
-    if (currentCard == 0) {
+    if (currentCard === 0) {
       const targetCards = getWorkCards(workSelected, deckCards);
       setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
     }

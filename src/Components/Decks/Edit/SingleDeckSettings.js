@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import Header from "../../Header/Header";
 import AddCardBar from "./AddCardBar";
@@ -20,7 +20,7 @@ const SingleDeckSettings = () => {
   const [cards, setCards] = useState(deckData.cards);
 
   return (
-    <div className="flex flex-col justify-center ">
+    <div className="flex flex-col justify-center overflow-hidden h-full">
       <Header title={`Edit ${deckData.name}`} />
       <div className="flex flex-col space-y-4">
         <SearchCardBar

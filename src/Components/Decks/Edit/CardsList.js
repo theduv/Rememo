@@ -55,7 +55,7 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-8 max-w-1/4 overflow-y-auto h-1/2">
+    <div className="flex items-center justify-center mt-8 max-w-1/4 h-1/2">
       <div className="grid grid-cols-2 gap-y-4 items-center w-1/3">
         <h1 className="py-2 px-4 italic text-lg rounded-lg font-bold">Front</h1>
         <h1 className="py-2 px-4 italic text-lg rounded-lg font-bold">Back</h1>
@@ -65,6 +65,7 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
               card.front.toLowerCase().includes(valueSearch.toLowerCase()) ||
               card.back.toLowerCase().includes(valueSearch.toLowerCase())
           )
+          .sort((a, b) => a.front - b.front)
           .map((card) => (
             <>
               <div className="py-1 px-3 rounded-lg">{card.front}</div>

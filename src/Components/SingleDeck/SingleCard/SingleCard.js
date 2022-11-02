@@ -20,7 +20,10 @@ const SingleCard = ({
 
   return (
     <div className="flex flex-col space-y-12 items-center w-full h-full">
-      <div className="border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96">
+      <div
+        className="border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96"
+        style={{ minWidth: 350 }}
+      >
         <h1 className="m-auto text-3xl text-center">{cardData.front}</h1>
         <div className="border w-full border-gray-300" />
         {clickedShow ? (

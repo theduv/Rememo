@@ -4,6 +4,11 @@ const WorkSelect = ({ cards, setWorkSelected }) => {
     return wrongCards.length;
   };
 
+  const getFavCards = () => {
+    const favCards = cards.filter((card) => card.fav === true);
+    return favCards.length;
+  };
+
   const onClickAll = () => {
     setWorkSelected("all");
   };
@@ -12,19 +17,29 @@ const WorkSelect = ({ cards, setWorkSelected }) => {
     setWorkSelected("wrong");
   };
 
+  const onClickFav = () => {
+    setWorkSelected("fav");
+  };
+
   return (
     <div className="flex items-center justify-center space-x-12">
       <div
         onClick={onClickAll}
-        className="cursor-pointer text-3xl rounded-lg border-2 border-gray-400 bg-green-200 p-24"
+        className="cursor-pointer text-3xl rounded-lg border-2 border-gray-400 bg-green-100 p-24"
       >
         <h1>All cards ({cards.length})</h1>
       </div>
       <div
         onClick={onClickWrong}
-        className="cursor-pointer text-3xl rounded-lg border-2 border-gray-400 bg-red-200 p-24"
+        className="cursor-pointer text-3xl rounded-lg border-2 border-gray-400 bg-red-100 p-24"
       >
         <h1>Wrong cards ({getWrongCards()})</h1>
+      </div>
+      <div
+        onClick={onClickFav}
+        className="cursor-pointer text-3xl rounded-lg border-2 border-gray-400 bg-yellow-100 p-24"
+      >
+        <h1>Fav cards ({getFavCards()})</h1>
       </div>
     </div>
   );

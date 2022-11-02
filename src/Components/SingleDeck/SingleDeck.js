@@ -16,6 +16,9 @@ const getWorkCards = (workSelected, cards) => {
   if (workSelected === "wrong") {
     return cards.filter((card) => card.lastResult === "wrong");
   }
+  if (workSelected === "fav") {
+    return cards.filter((card) => card.fav === true);
+  }
   return cards;
 };
 

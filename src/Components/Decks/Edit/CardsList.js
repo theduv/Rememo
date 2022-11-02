@@ -1,4 +1,4 @@
-import { Star, XCircle } from "react-feather";
+import { Delete, Star, Trash, Trash2, X, XCircle } from "react-feather";
 const fs = window.require("fs");
 
 const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
@@ -32,11 +32,9 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
 
   return (
     <div className="flex items-center justify-center mt-8 max-w-1/4 overflow-y-auto h-1/2">
-      <div className="grid grid-cols-4 gap-y-4 items-center w-2/3">
+      <div className="grid grid-cols-2 gap-y-4 items-center w-1/3">
         <h1 className="py-2 px-4 italic text-lg rounded-lg font-bold">Front</h1>
         <h1 className="py-2 px-4 italic text-lg rounded-lg font-bold">Back</h1>
-        <div></div>
-        <div></div>
         {cards
           .filter(
             (card) =>
@@ -46,15 +44,22 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
           .map((card) => (
             <>
               <div className="py-1 px-3 rounded-lg">{card.front}</div>
-              <div className="py-1 px-3 rounded-lg">{card.back}</div>
-              <div
-                className="text-gray-500 cursor-pointer"
-                onClick={() => onClickDelete(card)}
-              >
-                <XCircle />
-              </div>
-              <div className="cursor-pointer" onClick={() => onClickFav(card)}>
-                <Star fill={card.fav ? "orange" : "white"} color="orange" />
+              <div className="grid grid-cols-2 items-center">
+                <div className="py-1 px-3 rounded-lg">{card.back}</div>
+                <div className="flex items-center space-x-3">
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => onClickFav(card)}
+                  >
+                    <Star fill={card.fav ? "orange" : "white"} color="orange" />
+                  </div>
+                  <div
+                    className="text-gray-500 cursor-pointer"
+                    onClick={() => onClickDelete(card)}
+                  >
+                    <Trash />
+                  </div>
+                </div>
               </div>
             </>
           ))}

@@ -1,19 +1,43 @@
-import { Delete, Star, Trash, Trash2, X, XCircle } from "react-feather";
+import { useRef, useState } from "react";
+import { Star, Trash } from "react-feather";
+import GlobalModal from "../../Shareable/GlobalModal";
 const fs = window.require("fs");
 
 const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
-  const onClickDelete = (card) => {
+  const [openModal, setOpenModal] = useState(false);
+  const deleteCard = useRef(false);
+  const cardRef = useRef({});
+
+  const onClickYesDelete = () => {
+    deleteCard.current = true;
+    handleCloseModal();
+  };
+
+  const onClickNoDelete = () => {
+    setOpenModal(false);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    if (deleteCard.current === false) return;
     const data = fs.readFileSync("src/data/decks.json", "utf8");
     const parsedData = JSON.parse(data);
     const targetDeck = parsedData.find((deck) => deck.id === deckData.id);
     const targetCards = targetDeck.cards;
     const newCards = targetCards.filter(
-      (curCard) => curCard.front !== card.front && curCard.back !== card.back
+      (curCard) =>
+        curCard.front !== cardRef.current.front &&
+        curCard.back !== cardRef.current.back
     );
     targetDeck.cards = newCards;
     targetDeck.numberOfCards--;
     setCards(newCards);
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
+  };
+
+  const onClickDelete = (card) => {
+    cardRef.current = { ...card };
+    setOpenModal(true);
   };
 
   const onClickFav = (card) => {
@@ -64,6 +88,32 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
             </>
           ))}
       </div>
+      <GlobalModal
+        openModal={openModal}
+        title="Remove a card"
+        handleClose={handleCloseModal}
+      >
+        <div>
+          <h3>
+            Do you really want to remove this card ? (front:{" "}
+            {cardRef.current.front} | back: {cardRef.current.back})
+          </h3>
+          <div className="flex space-x-4 mt-8">
+            <button
+              className="rounded-lg bg-gray-500 text-white px-4 py-2"
+              onClick={onClickYesDelete}
+            >
+              Yes
+            </button>
+            <button
+              onClick={onClickNoDelete}
+              className="rounded-lg bg-gray-500 text-white px-4 py-2"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </GlobalModal>
     </div>
   );
 };

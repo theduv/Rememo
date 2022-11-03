@@ -25,7 +25,7 @@ const Header = ({ title }: HeaderProps) => {
         <h1 className="text-4xl flex-1">{title}</h1>
       </div>
       <div className="flex-1 justify-end flex">
-        <div className="rounded-lg bg-gray-900 py-2 px-4 cursor-pointer ">
+        <div className="rounded-lg bg-gray-300 py-2 text-white px-4 cursor-pointer ">
           Save changes
         </div>
       </div>

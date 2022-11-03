@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
-import Results from "./CardResults/CardResults";
+import CardResults from "./CardResults/CardResults";
 
 interface SingleCardProps {
   cardData: Card;
@@ -43,7 +43,7 @@ const SingleCard = ({
           </button>
         )}
       </div>
-      <Results
+      <CardResults
         setCurrentResults={setCurrentResults}
         onClickResult={onClickResult}
         clickedShow={clickedShow}

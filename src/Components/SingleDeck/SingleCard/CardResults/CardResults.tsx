@@ -1,5 +1,16 @@
+import { Dispatch, SetStateAction } from "react";
 import { CheckCircle, XCircle } from "react-feather";
+import { Card } from "../../../../Interfaces/card.interface";
+import { Deck } from "../../../../Interfaces/deck.interface";
 const fs = window.require("fs");
+
+interface CardResultsProps {
+  onClickResult: () => void;
+  clickedShow: boolean;
+  deckData: Deck;
+  cardData: Card;
+  setCurrentResults: Dispatch<SetStateAction<{ wrong: number; right: number }>>;
+}
 
 const CardResults = ({
   onClickResult,
@@ -7,7 +18,7 @@ const CardResults = ({
   deckData,
   cardData,
   setCurrentResults,
-}) => {
+}: CardResultsProps) => {
   const onClickCorrect = () => {
     if (!clickedShow) return;
 
@@ -18,8 +29,12 @@ const CardResults = ({
 
     const data = fs.readFileSync("src/data/decks.json");
     const parsedDecks = JSON.parse(data);
-    const targetDeck = parsedDecks.find((deck) => deck.id === deckData.id);
-    const targetCard = targetDeck.cards.find((card) => card.id === cardData.id);
+    const targetDeck = parsedDecks.find(
+      (deck: Deck) => deck.id === deckData.id
+    );
+    const targetCard = targetDeck.cards.find(
+      (card: Deck) => card.id === cardData.id
+    );
     targetCard.lastResult = "right";
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
 
@@ -36,8 +51,12 @@ const CardResults = ({
 
     const data = fs.readFileSync("src/data/decks.json");
     const parsedDecks = JSON.parse(data);
-    const targetDeck = parsedDecks.find((deck) => deck.id === deckData.id);
-    const targetCard = targetDeck.cards.find((card) => card.id === cardData.id);
+    const targetDeck = parsedDecks.find(
+      (deck: Deck) => deck.id === deckData.id
+    );
+    const targetCard = targetDeck.cards.find(
+      (card: Card) => card.id === cardData.id
+    );
     targetCard.lastResult = "wrong";
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
 

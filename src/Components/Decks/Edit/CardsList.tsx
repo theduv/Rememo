@@ -70,7 +70,7 @@ const CardsList = ({
   };
 
   return (
-    <div className="flex items-center justify-center mt-8 max-w-1/4 h-1/2">
+    <div className="flex items-center justify-center mt-8 max-w-1/4 overflow-y-auto">
       <div className="grid grid-cols-2 mb-12 gap-y-4 items-center w-1/3">
         {cards
           .filter(

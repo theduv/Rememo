@@ -21,14 +21,16 @@ const SingleDeckSettings = () => {
   const [cards, setCards] = useState(deckData.cards);
 
   return (
-    <div className="flex flex-col justify-center overflow-hidden h-full">
+    <div className="h-full">
       <Header title={`Edit ${deckData.name}`} />
       <div className="flex flex-col space-y-4">
-        <SearchCardBar
-          valueSearch={valueSearch}
-          setValueSearch={setValueSearch}
-        />
-        <AddCardBar setCards={setCards} deckData={deckData} />
+        <div className="flex flex-col space-y-4">
+          <SearchCardBar
+            valueSearch={valueSearch}
+            setValueSearch={setValueSearch}
+          />
+          <AddCardBar setCards={setCards} deckData={deckData} />
+        </div>
         <CardsList
           valueSearch={valueSearch}
           cards={cards}

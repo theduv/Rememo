@@ -20,7 +20,7 @@ const Header = ({ title }) => {
       <div>
         <h1 className="text-4xl">{title}</h1>
       </div>
-      <div className="flex-1 ml-auto"></div>
+      <div className="flex-1"></div>
     </div>
   );
 };

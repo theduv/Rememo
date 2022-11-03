@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Deck } from "../../Interfaces/deck.interface";
 import Header from "../Header/Header";
 import CreateBar from "./CreateBar";
 import DecksListSettings from "./DecksListSettings";
@@ -6,7 +7,7 @@ import NoDeck from "./NoDeck";
 const fs = window.require("fs");
 
 const Decks = () => {
-  const [decks, setDecks] = useState([]);
+  const [decks, setDecks] = useState<Array<Deck>>([]);
 
   useEffect(() => {
     const data = fs.readFileSync("src/data/decks.json", "utf8");

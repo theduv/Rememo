@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useParams } from "react-router";
+import { Deck } from "../../../Interfaces/deck.interface";
 import Header from "../../Header/Header";
 import AddCardBar from "./AddCardBar";
 import CardsList from "./CardsList";
 import SearchCardBar from "./SearchCardBar";
 const fs = window.require("fs");
 
-const getDeckData = (id) => {
+const getDeckData = (id: string | undefined) => {
   const data = fs.readFileSync("src/data/decks.json", "utf8");
   const parsedDecks = JSON.parse(data);
-  return parsedDecks.find((deck) => deck.id === id);
+  return parsedDecks.find((deck: Deck) => deck.id === id);
 };
 
 const SingleDeckSettings = () => {

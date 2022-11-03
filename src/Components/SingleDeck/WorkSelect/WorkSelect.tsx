@@ -1,4 +1,12 @@
-const WorkSelect = ({ cards, setWorkSelected }) => {
+import { Dispatch, SetStateAction } from "react";
+import { Card } from "../../../Interfaces/card.interface";
+
+interface WorkSelectProps {
+  cards: Array<Card>;
+  setWorkSelected: Dispatch<SetStateAction<string>>;
+}
+
+const WorkSelect = ({ cards, setWorkSelected }: WorkSelectProps) => {
   const getWrongCards = () => {
     const wrongCards = cards.filter((card) => card.lastResult === "wrong");
     return wrongCards.length;

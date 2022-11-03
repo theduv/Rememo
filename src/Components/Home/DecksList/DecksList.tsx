@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
+import { Deck } from "../../../Interfaces/deck.interface";
 import DeckPreview from "./DeckPreview/DeckPreview";
 
-const DecksList = ({ decks }) => {
+interface DecksListProps {
+  decks: Array<Deck>;
+}
+
+const DecksList = ({ decks }: DecksListProps) => {
   return (
     <div className="flex flex-col justify-center items-center space-y-4">
       {decks.length ? (

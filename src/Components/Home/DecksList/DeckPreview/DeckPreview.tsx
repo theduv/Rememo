@@ -1,8 +1,13 @@
 import { Book } from "react-feather";
 import { Link } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
+import { Deck } from "../../../../Interfaces/deck.interface";
 
-const DeckPreview = ({ deck }) => {
+interface DeckPreviewProps {
+  deck: Deck;
+}
+
+const DeckPreview = ({ deck }: DeckPreviewProps) => {
   return (
     <Link to={`/deck/${deck.id}`}>
       <button

@@ -1,7 +1,13 @@
+import React, { Dispatch, SetStateAction } from "react";
 import { Search } from "react-feather";
 
-const SearchCardBar = ({ valueSearch, setValueSearch }) => {
-  const onChangeSearch = (e) => {
+interface SearchCardBarProps {
+  valueSearch: string;
+  setValueSearch: Dispatch<SetStateAction<string>>;
+}
+
+const SearchCardBar = ({ valueSearch, setValueSearch }: SearchCardBarProps) => {
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearch(e.target.value);
   };
 

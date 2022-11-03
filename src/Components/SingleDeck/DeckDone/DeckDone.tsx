@@ -1,4 +1,16 @@
-const DeckDone = ({ setCurrentCard, setCurrentResults, currentResults }) => {
+import { Dispatch, SetStateAction } from "react";
+
+interface DeckDoneProps {
+  setCurrentCard: Dispatch<SetStateAction<number>>;
+  setCurrentResults: Dispatch<SetStateAction<{ wrong: number; right: number }>>;
+  currentResults: { wrong: number; right: number };
+}
+
+const DeckDone = ({
+  setCurrentCard,
+  setCurrentResults,
+  currentResults,
+}: DeckDoneProps) => {
   const onClickAgain = () => {
     setCurrentCard(0);
     setCurrentResults({ wrong: 0, right: 0 });

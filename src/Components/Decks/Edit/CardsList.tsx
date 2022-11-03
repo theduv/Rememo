@@ -1,12 +1,26 @@
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Star, Trash } from "react-feather";
+import { Card } from "../../../Interfaces/card.interface";
+import { Deck } from "../../../Interfaces/deck.interface";
 import GlobalModal from "../../Shareable/GlobalModal";
 const fs = window.require("fs");
 
-const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
+interface CardsListProps {
+  cards: Array<Card>;
+  setCards: Dispatch<SetStateAction<Array<Card>>>;
+  deckData: Deck;
+  valueSearch: string;
+}
+
+const CardsList = ({
+  cards,
+  setCards,
+  deckData,
+  valueSearch,
+}: CardsListProps) => {
   const [openModal, setOpenModal] = useState(false);
   const deleteCard = useRef(false);
-  const cardRef = useRef({});
+  const cardRef = useRef({ ...cards[0] });
 
   const onClickYesDelete = () => {
     deleteCard.current = true;
@@ -22,10 +36,10 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
     if (deleteCard.current === false) return;
     const data = fs.readFileSync("src/data/decks.json", "utf8");
     const parsedData = JSON.parse(data);
-    const targetDeck = parsedData.find((deck) => deck.id === deckData.id);
+    const targetDeck = parsedData.find((deck: Deck) => deck.id === deckData.id);
     const targetCards = targetDeck.cards;
     const newCards = targetCards.filter(
-      (curCard) =>
+      (curCard: { front: string; back: string; fav: boolean }) =>
         curCard.front !== cardRef.current.front &&
         curCard.back !== cardRef.current.back
     );
@@ -35,18 +49,19 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
   };
 
-  const onClickDelete = (card) => {
+  const onClickDelete = (card: Card) => {
     cardRef.current = { ...card };
     setOpenModal(true);
   };
 
-  const onClickFav = (card) => {
+  const onClickFav = (card: Card) => {
     const data = fs.readFileSync("src/data/decks.json", "utf8");
     const parsedData = JSON.parse(data);
-    const targetDeck = parsedData.find((deck) => deck.id === deckData.id);
+    const targetDeck = parsedData.find((deck: Deck) => deck.id === deckData.id);
     const targetCards = targetDeck.cards;
     const targetCard = targetCards.find(
-      (curCard) => curCard.front === card.front && curCard.back === card.back
+      (curCard: Card) =>
+        curCard.front === card.front && curCard.back === card.back
     );
     console.log(targetCard.front);
     targetCard.fav = !!!targetCard.fav;
@@ -63,7 +78,6 @@ const CardsList = ({ cards, setCards, deckData, valueSearch }) => {
               card.front.toLowerCase().includes(valueSearch.toLowerCase()) ||
               card.back.toLowerCase().includes(valueSearch.toLowerCase())
           )
-          .sort((a, b) => a.front - b.front)
           .map((card) => (
             <>
               <div className="py-1 px-3 rounded-lg">{card.front}</div>

@@ -1,5 +1,13 @@
+import React from "react";
 import { X } from "react-feather";
 import Modal from "react-modal";
+
+interface GlobalModalProps {
+  openModal: boolean;
+  handleClose: () => any;
+  title: string;
+  children: JSX.Element;
+}
 
 const customStyles = {
   content: {
@@ -16,7 +24,12 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const GlobalModal = ({ openModal, handleClose, title, children }) => {
+const GlobalModal = ({
+  openModal,
+  handleClose,
+  title,
+  children,
+}: GlobalModalProps) => {
   return (
     <Modal isOpen={openModal} onRequestClose={handleClose} style={customStyles}>
       <div className="flex justify-between items-center mb-12">

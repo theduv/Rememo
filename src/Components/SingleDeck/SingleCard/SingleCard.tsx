@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { Card } from "../../../Interfaces/card.interface";
+import { Deck } from "../../../Interfaces/deck.interface";
 import Results from "./CardResults/CardResults";
+
+interface SingleCardProps {
+  cardData: Card;
+  setCurrentCard: Dispatch<SetStateAction<number>>;
+  deckData: Deck;
+  setCurrentResults: Dispatch<SetStateAction<{ right: number; wrong: number }>>;
+}
 
 const SingleCard = ({
   cardData,
   setCurrentCard,
   deckData,
   setCurrentResults,
-}) => {
+}: SingleCardProps) => {
   const [clickedShow, setClickedShow] = useState(false);
 
   const onClickShow = () => {

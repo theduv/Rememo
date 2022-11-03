@@ -6,6 +6,10 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.2.1",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
     "electron-json-storage": "^4.6.0",
@@ -23,11 +27,12 @@
     "react-scripts": "5.0.0",
     "react-testing-library": "^8.0.1",
     "react-tooltip": "^4.4.3",
+    "typescript": "^4.8.4",
     "util": "^0.12.5",
     "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
-  "main": "public/electron.js",
+  "main": "public/electron.ts",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -56,6 +61,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-modal": "^3.13.1",
     "autoprefixer": "^10.4.2",
     "concurrently": "^7.5.0",
     "electron": "^21.2.0",

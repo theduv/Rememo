@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Card } from "../../Interfaces/card.interface";
+import { Deck } from "../../Interfaces/deck.interface";
 import Header from "../Header/Header";
 import DeckDone from "./DeckDone/DeckDone";
 import SingleCard from "./SingleCard/SingleCard";
 import WorkSelect from "./WorkSelect/WorkSelect";
 const fs = window.require("fs");
 
-const getDeckData = (id) => {
+const getDeckData = (id: string | undefined) => {
   const data = fs.readFileSync("src/data/decks.json", "utf8");
   const parsedDecks = JSON.parse(data);
-  return parsedDecks.find((deck) => deck.id === id);
+  return parsedDecks.find((deck: Deck) => deck.id === id);
 };
 
-const getWorkCards = (workSelected, cards) => {
+const getWorkCards = (workSelected: string, cards: Array<Card>) => {
   if (workSelected === "wrong") {
     return cards.filter((card) => card.lastResult === "wrong");
   }
@@ -42,6 +44,7 @@ const SingleDeck = () => {
       const targetCards = getWorkCards(workSelected, deckCards);
       setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workSelected, currentCard]);
 
   return (

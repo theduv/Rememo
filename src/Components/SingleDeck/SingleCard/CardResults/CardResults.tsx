@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { CheckCircle, XCircle } from "react-feather";
@@ -20,6 +21,19 @@ const CardResults = ({
   cardData,
   setCurrentResults,
 }: CardResultsProps) => {
+  const [keyPressed, setKeyPressed] = useState("undefined");
+
+  useEffect(() => {
+    if (keyPressed === "d") onClickAnswer("right");
+    if (keyPressed === "a") onClickAnswer("wrong");
+  }, [keyPressed]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+      setKeyPressed(event.key);
+    });
+  });
+
   const onClickAnswer = (answer: string) => {
     if (!clickedShow) return;
 

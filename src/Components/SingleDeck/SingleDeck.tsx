@@ -55,12 +55,17 @@ const SingleDeck = () => {
           {workSelected === "none" ? (
             <WorkSelect cards={deckCards} setWorkSelected={setWorkSelected} />
           ) : currentCard < shuffledDeck.length && shuffledDeck.length ? (
-            <SingleCard
-              setCurrentResults={setCurrentResults}
-              deckData={deckData}
-              cardData={shuffledDeck[currentCard]}
-              setCurrentCard={setCurrentCard}
-            />
+            <div>
+              <div className="text-xl text-center mb-8">
+                {currentCard + 1} / {shuffledDeck.length}
+              </div>
+              <SingleCard
+                setCurrentResults={setCurrentResults}
+                deckData={deckData}
+                cardData={shuffledDeck[currentCard]}
+                setCurrentCard={setCurrentCard}
+              />
+            </div>
           ) : (
             <DeckDone
               setCurrentCard={setCurrentCard}

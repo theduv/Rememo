@@ -20,7 +20,7 @@ const CardResults = ({
   cardData,
   setCurrentResults,
 }: CardResultsProps) => {
-  const onClickCorrect = () => {
+  const onClickAnswer = (answer: string) => {
     if (!clickedShow) return;
 
     setCurrentResults((oldResults) => ({
@@ -36,29 +36,7 @@ const CardResults = ({
     const targetCard = targetDeck.cards.find(
       (card: Deck) => card.id === cardData.id
     );
-    targetCard.lastResult = "right";
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
-
-    onClickResult();
-  };
-
-  const onClickIncorrect = () => {
-    if (!clickedShow) return;
-
-    setCurrentResults((oldResults) => ({
-      ...oldResults,
-      wrong: oldResults.wrong + 1,
-    }));
-
-    const data = fs.readFileSync("src/data/decks.json");
-    const parsedDecks = JSON.parse(data);
-    const targetDeck = parsedDecks.find(
-      (deck: Deck) => deck.id === deckData.id
-    );
-    const targetCard = targetDeck.cards.find(
-      (card: Card) => card.id === cardData.id
-    );
-    targetCard.lastResult = "wrong";
+    targetCard.lastResult = answer;
     fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
 
     onClickResult();
@@ -66,11 +44,12 @@ const CardResults = ({
 
   useEffect(() => {
     document.addEventListener("keydown", (event: KeyboardEvent) => {
-      if (event.key === "a") {
-        onClickIncorrect();
+      console.log(clickedShow, event.key);
+      if (event.key === "a" && clickedShow) {
+        onClickAnswer("wrong");
       }
-      if (event.key === "d") {
-        onClickCorrect();
+      if (event.key === "d" && clickedShow) {
+        onClickAnswer("right");
       }
     });
   }, []);
@@ -78,13 +57,13 @@ const CardResults = ({
   return (
     <div className="flex space-x-12 justify-center">
       <XCircle
-        onClick={onClickIncorrect}
+        onClick={() => onClickAnswer("wrong")}
         width={32}
         height={32}
         className="text-gray-500 cursor-pointer"
       />
       <CheckCircle
-        onClick={onClickCorrect}
+        onClick={() => onClickAnswer("right")}
         width={32}
         height={32}
         className="text-gray-500 cursor-pointer"

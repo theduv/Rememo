@@ -32,6 +32,7 @@ const SingleCard = ({
   }, []);
 
   const onClickResult = () => {
+    console.log("setting false");
     setCurrentCard((oldCardIndex) => oldCardIndex + 1);
     setClickedShow(false);
   };

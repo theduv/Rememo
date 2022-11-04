@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
@@ -21,6 +22,14 @@ const SingleCard = ({
   const onClickShow = () => {
     setClickedShow(true);
   };
+
+  useEffect(() => {
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+      if (event.key === "w" || event.key === "s") {
+        setClickedShow(true);
+      }
+    });
+  }, []);
 
   const onClickResult = () => {
     setCurrentCard((oldCardIndex) => oldCardIndex + 1);

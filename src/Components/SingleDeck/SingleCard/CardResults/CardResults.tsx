@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { CheckCircle, XCircle } from "react-feather";
 import { Card } from "../../../../Interfaces/card.interface";
@@ -62,6 +63,17 @@ const CardResults = ({
 
     onClickResult();
   };
+
+  useEffect(() => {
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+      if (event.key === "a") {
+        onClickIncorrect();
+      }
+      if (event.key === "d") {
+        onClickCorrect();
+      }
+    });
+  }, []);
 
   return (
     <div className="flex space-x-12 justify-center">

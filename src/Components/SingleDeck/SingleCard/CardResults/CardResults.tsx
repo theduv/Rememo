@@ -42,18 +42,6 @@ const CardResults = ({
     onClickResult();
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      console.log(clickedShow, event.key);
-      if (event.key === "a" && clickedShow) {
-        onClickAnswer("wrong");
-      }
-      if (event.key === "d" && clickedShow) {
-        onClickAnswer("right");
-      }
-    });
-  }, []);
-
   return (
     <div className="flex space-x-12 justify-center">
       <XCircle

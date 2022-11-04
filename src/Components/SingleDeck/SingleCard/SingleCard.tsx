@@ -23,16 +23,7 @@ const SingleCard = ({
     setClickedShow(true);
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      if (event.key === "w" || event.key === "s") {
-        setClickedShow(true);
-      }
-    });
-  }, []);
-
   const onClickResult = () => {
-    console.log("setting false");
     setCurrentCard((oldCardIndex) => oldCardIndex + 1);
     setClickedShow(false);
   };

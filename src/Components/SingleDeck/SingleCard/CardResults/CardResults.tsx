@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { CheckCircle, XCircle } from "react-feather";
@@ -21,21 +20,20 @@ const CardResults = ({
   cardData,
   setCurrentResults,
 }: CardResultsProps) => {
-  const [keyPressed, setKeyPressed] = useState("undefined");
-
-  useEffect(() => {
-    if (clickedShow === false) return;
-    if (keyPressed === "a") onClickAnswer("wrong");
-    if (keyPressed === "d") onClickAnswer("right");
-  }, [keyPressed]);
-
   const onClickAnswer = (answer: string) => {
     if (!clickedShow) return;
 
-    setCurrentResults((oldResults) => ({
-      ...oldResults,
-      right: oldResults.right + 1,
-    }));
+    if (answer === "right") {
+      setCurrentResults((oldResults) => ({
+        ...oldResults,
+        right: oldResults.right + 1,
+      }));
+    } else {
+      setCurrentResults((oldResults) => ({
+        ...oldResults,
+        wrong: oldResults.wrong + 1,
+      }));
+    }
 
     const data = fs.readFileSync("src/data/decks.json");
     const parsedDecks = JSON.parse(data);
@@ -50,12 +48,6 @@ const CardResults = ({
 
     onClickResult();
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      setKeyPressed(event.key);
-    });
-  }, []);
 
   return (
     <div className="flex space-x-12 justify-center">

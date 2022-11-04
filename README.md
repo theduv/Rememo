@@ -10,6 +10,6 @@ In the project directory, you can run:
 
 ### `npm i ; npm run electron-dev`
 
-Runs the app in the development mode via ElectronJS.\
+Runs the app in the development mode via ElectronJS.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.

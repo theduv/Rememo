@@ -25,7 +25,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
         front: frontValue,
         back: backValue,
         id: v4(),
-        fav: false,
+        fav: true,
         lastResult: "wrong",
       },
     ];

@@ -1,5 +1,7 @@
 # Rememo (may you never forget !)
 
+![alt text](https://github.com/theduv/rememo/blob/main/images/working.jpg?raw=true)
+
 This project was made by a languages learner to facilitate his vocabulary learning process.
 
 ## How to run

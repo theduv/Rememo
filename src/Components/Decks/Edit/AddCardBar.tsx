@@ -4,6 +4,7 @@ import { uuid as v4 } from "uuidv4";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
+import useSettingsStore from "../../../stores/settings";
 
 interface AddCardBarProps {
   setCards: Dispatch<SetStateAction<Array<Card>>>;
@@ -16,6 +17,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
   const setSomethingChanged = useDecksStore(
     (state: any) => state.setSomethingChanged
   );
+  const settings = useSettingsStore((state: any) => state.settings);
   const decks = useDecksStore((state: any) => state.decks);
   const setDecks = useDecksStore((state: any) => state.setDecks);
 
@@ -28,7 +30,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
         front: frontValue,
         back: backValue,
         id: v4(),
-        fav: true,
+        fav: settings.favOnAdd,
         lastResult: "wrong",
       },
     ];

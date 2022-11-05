@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
@@ -6,6 +6,7 @@ import Header from "../../Header/Header";
 import AddCardBar from "./AddCardBar";
 import CardsList from "./CardsList";
 import SearchCardBar from "./SearchCardBar";
+const ipcRenderer = window.require("electron").ipcRenderer;
 
 const SingleDeckSettings = () => {
   const params = useParams();
@@ -14,6 +15,13 @@ const SingleDeckSettings = () => {
   const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const [valueSearch, setValueSearch] = useState("");
   const [cards, setCards] = useState(deckData.cards);
+
+  useEffect(() => {
+    ipcRenderer.send("editing", {
+      title: `Editing ${deckData.name}`,
+      deck: "undefined",
+    });
+  }, []);
 
   return (
     <div className="h-full">

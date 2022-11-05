@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SelectHTMLAttributes,
-  SetStateAction,
-  useState,
-} from "react";
-import { Card } from "../../../Interfaces/card.interface";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface WorkSelectProps {
   setWorkSelected: Dispatch<
@@ -31,13 +24,6 @@ const WorkSelect = ({
 
   const onChangeReverse = (e: any) => {
     return; //does nothing for the moment
-    setReverse(e.target.checked);
-    setWorkSelected(
-      (oldWork: { cards: string; canStart: boolean; reverse: boolean }) => ({
-        ...oldWork,
-        boolean: e.target.checked,
-      })
-    );
   };
 
   return (

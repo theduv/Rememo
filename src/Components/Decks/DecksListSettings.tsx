@@ -1,11 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
 import { Deck } from "../../Interfaces/deck.interface";
 import useDecksStore from "../../stores/decks";
 import DeckPreviewSettings from "./DeckPreviewSettings";
 
-interface DecksListSettingsProps {}
-
-const DecksListSettings = ({}: DecksListSettingsProps) => {
+const DecksListSettings = () => {
   const decks = useDecksStore((state: any) => state.decks);
 
   return (

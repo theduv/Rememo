@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import DeckDone from "./DeckDone/DeckDone";
 import SingleCard from "./SingleCard/SingleCard";
 import WorkSelect from "./WorkSelect/WorkSelect";
+const ipcRenderer = window.require("electron").ipcRenderer;
 
 const getWorkCards = (workSelected: string, cards: Array<Card>) => {
   if (workSelected === "wrong") {
@@ -37,6 +38,16 @@ const SingleDeck = () => {
     deckCards.sort((a, b) => 0.5 - Math.random())
   );
   const [currentCard, setCurrentCard] = useState(0);
+
+  useEffect(() => {
+    if (workSelected.canStart === true) {
+      console.log("yes");
+      ipcRenderer.send("changeDeck", {
+        title: "Working",
+        deck: deckData.name,
+      });
+    }
+  }, [workSelected]);
 
   const onClickStartLearn = () => {
     const targetCards = getWorkCards(workSelected.cards, deckCards);

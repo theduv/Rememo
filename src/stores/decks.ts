@@ -1,8 +1,9 @@
 import create from "zustand";
 import { Deck } from "../Interfaces/deck.interface";
 const fs = window.require("fs");
+let appData = window.require("app-data-folder");
 
-const data = fs.readFileSync("src/data/decks.json");
+const data = fs.readFileSync(appData("Rememo") + "\\decks.json");
 const parsedData = JSON.parse(data);
 
 const useDecksStore = create((set) => ({

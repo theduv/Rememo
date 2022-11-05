@@ -2,6 +2,7 @@ import { useState } from "react";
 import useDecksStore from "../../stores/decks";
 import useSettingsStore from "../../stores/settings";
 import LoadingSpin from "react-loading-spin";
+let appData = window.require("app-data-folder");
 const fs = window.require("fs");
 
 const SaveChanges = () => {
@@ -30,8 +31,11 @@ const SaveChanges = () => {
 
   const onClickSave = () => {
     setLoading(true);
-    fs.writeFileSync("src/data/settings.json", JSON.stringify(settings));
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(decks));
+    fs.writeFileSync(
+      appData("Rememo") + "\\settings.json",
+      JSON.stringify(settings)
+    );
+    fs.writeFileSync(appData("Rememo") + "\\decks.json", JSON.stringify(decks));
     setSomethingChangedDecks(false);
     setSomethingChangedSettings(false);
     setLoading(false);

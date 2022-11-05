@@ -2,17 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Card } from "../../Interfaces/card.interface";
 import { Deck } from "../../Interfaces/deck.interface";
+import useDecksStore from "../../stores/decks";
 import Header from "../Header/Header";
 import DeckDone from "./DeckDone/DeckDone";
 import SingleCard from "./SingleCard/SingleCard";
 import WorkSelect from "./WorkSelect/WorkSelect";
-const fs = window.require("fs");
-
-const getDeckData = (id: string | undefined) => {
-  const data = fs.readFileSync("src/data/decks.json", "utf8");
-  const parsedDecks = JSON.parse(data);
-  return parsedDecks.find((deck: Deck) => deck.id === id);
-};
 
 const getWorkCards = (workSelected: string, cards: Array<Card>) => {
   if (workSelected === "wrong") {
@@ -26,8 +20,9 @@ const getWorkCards = (workSelected: string, cards: Array<Card>) => {
 
 const SingleDeck = () => {
   const params = useParams();
+  const decks = useDecksStore((state: any) => state.decks);
   const deckID = params.id;
-  const deckData = getDeckData(deckID);
+  const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const deckCards = [...deckData.cards];
   const [currentResults, setCurrentResults] = useState({
     right: 0,

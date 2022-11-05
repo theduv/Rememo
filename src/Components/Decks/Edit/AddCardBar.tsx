@@ -3,7 +3,7 @@ import { Check } from "react-feather";
 import { uuid as v4 } from "uuidv4";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
-const fs = window.require("fs");
+import useDecksStore from "../../../stores/decks";
 
 interface AddCardBarProps {
   setCards: Dispatch<SetStateAction<Array<Card>>>;
@@ -13,10 +13,13 @@ interface AddCardBarProps {
 const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
   const [frontValue, setFrontValue] = useState<string>("");
   const [backValue, setBackValue] = useState<string>("");
+  const setSomethingChanged = useDecksStore(
+    (state: any) => state.setSomethingChanged
+  );
+  const decks = useDecksStore((state: any) => state.decks);
+  const setDecks = useDecksStore((state: any) => state.setDecks);
 
   const onClickCheck = () => {
-    const data = fs.readFileSync("src/data/decks.json", "utf8");
-    const parsedData = JSON.parse(data);
     const oldDeckData = { ...deckData };
 
     const newCards = [
@@ -31,12 +34,12 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
     ];
     setCards(newCards);
     oldDeckData.cards = newCards;
-    const indexTargetDeck = parsedData
-      .map((deck: Deck) => deck.id)
-      .indexOf(deckData.id);
-    parsedData[indexTargetDeck].cards = newCards;
-    parsedData[indexTargetDeck].numberOfCards++;
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
+    targetDeck.cards = newCards;
+    targetDeck.numberOfCards++;
+    setDecks(newDecks);
+    setSomethingChanged(true);
     setBackValue("");
     setFrontValue("");
   };

@@ -1,25 +1,27 @@
-import { Dispatch, SetStateAction } from "react";
 import { XCircle } from "react-feather";
 import { Link } from "react-router-dom";
 import { Deck } from "../../Interfaces/deck.interface";
-const fs = window.require("fs");
+import useDecksStore from "../../stores/decks";
 
 interface DeckPreviewSettingsProps {
   deck: Deck;
-  setDecks: Dispatch<SetStateAction<Array<Deck>>>;
 }
 
-const DeckPreviewSettings = ({ deck, setDecks }: DeckPreviewSettingsProps) => {
-  const onClickCross = () => {
-    const data = fs.readFileSync("src/data/decks.json", "utf8");
-    const parsedData = JSON.parse(data);
+const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
+  const decks = useDecksStore((state: any) => state.decks);
+  const setDecks = useDecksStore((state: any) => state.setDecks);
+  const setSomethingChanged = useDecksStore(
+    (state: any) => state.setSomethingChanged
+  );
 
-    const indexDeck = parsedData
+  const onClickCross = () => {
+    const newDecks = [...decks];
+    const indexDeck = decks
       .map((deck: { id: number }) => deck.id)
       .indexOf(deck.id);
-    parsedData.splice(indexDeck, 1);
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
-    setDecks(parsedData);
+    newDecks.splice(indexDeck, 1);
+    setDecks(newDecks);
+    setSomethingChanged(true);
   };
 
   return (

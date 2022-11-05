@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { Deck } from "../../../Interfaces/deck.interface";
+import useDecksStore from "../../../stores/decks";
 import DeckPreview from "./DeckPreview/DeckPreview";
 
-interface DecksListProps {
-  decks: Array<Deck>;
-}
+interface DecksListProps {}
 
-const DecksList = ({ decks }: DecksListProps) => {
+const DecksList = ({}: DecksListProps) => {
+  const decks = useDecksStore((state: any) => state.decks);
+
   return (
     <div className="flex flex-col justify-center items-center space-y-4">
       {decks.length ? (
-        decks.map((deck) => <DeckPreview deck={deck} />)
+        decks.map((deck: Deck) => <DeckPreview deck={deck} />)
       ) : (
         <div>
           You didn't create a deck yet.{" "}

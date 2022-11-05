@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Star, Trash } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
+import useDecksStore from "../../../stores/decks";
 import GlobalModal from "../../Shareable/GlobalModal";
-const fs = window.require("fs");
 
 interface CardsListProps {
   cards: Array<Card>;
@@ -20,6 +20,11 @@ const CardsList = ({
 }: CardsListProps) => {
   const [openModal, setOpenModal] = useState(false);
   const deleteCard = useRef(false);
+  const decks = useDecksStore((state: any) => state.decks);
+  const setDecks = useDecksStore((state: any) => state.setDecks);
+  const setSomethingChanged = useDecksStore(
+    (state: any) => state.setSomethingChanged
+  );
   const cardRef = useRef({ ...cards[0] });
 
   const onClickYesDelete = () => {
@@ -34,9 +39,8 @@ const CardsList = ({
   const handleCloseModal = () => {
     setOpenModal(false);
     if (deleteCard.current === false) return;
-    const data = fs.readFileSync("src/data/decks.json", "utf8");
-    const parsedData = JSON.parse(data);
-    const targetDeck = parsedData.find((deck: Deck) => deck.id === deckData.id);
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
     const targetCards = targetDeck.cards;
     const newCards = targetCards.filter(
       (curCard: { front: string; back: string; fav: boolean }) =>
@@ -45,8 +49,8 @@ const CardsList = ({
     );
     targetDeck.cards = newCards;
     targetDeck.numberOfCards--;
+    setDecks(newDecks);
     setCards(newCards);
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
   };
 
   const onClickDelete = (card: Card) => {
@@ -55,18 +59,17 @@ const CardsList = ({
   };
 
   const onClickFav = (card: Card) => {
-    const data = fs.readFileSync("src/data/decks.json", "utf8");
-    const parsedData = JSON.parse(data);
-    const targetDeck = parsedData.find((deck: Deck) => deck.id === deckData.id);
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
     const targetCards = targetDeck.cards;
     const targetCard = targetCards.find(
       (curCard: Card) =>
         curCard.front === card.front && curCard.back === card.back
     );
-    console.log(targetCard.front);
     targetCard.fav = !!!targetCard.fav;
     setCards(targetCards);
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedData));
+    setDecks(newDecks);
+    setSomethingChanged(true);
   };
 
   return (

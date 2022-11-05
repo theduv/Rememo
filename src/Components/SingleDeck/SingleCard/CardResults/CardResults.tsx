@@ -4,8 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 import { CheckCircle, XCircle } from "react-feather";
 import { Card } from "../../../../Interfaces/card.interface";
 import { Deck } from "../../../../Interfaces/deck.interface";
-const fs = window.require("fs");
-
+import useDecksStore from "../../../../stores/decks";
 interface CardResultsProps {
   onClickResult: () => void;
   clickedShow: boolean;
@@ -22,10 +21,16 @@ const CardResults = ({
   setCurrentResults,
 }: CardResultsProps) => {
   const [keyPressed, setKeyPressed] = useState("undefined");
+  const decks = useDecksStore((state: any) => state.decks);
+  const setDecks = useDecksStore((state: any) => state.setDecks);
+  const setSomethingChanged = useDecksStore(
+    (state: any) => state.setSomethingChanged
+  );
 
   useEffect(() => {
     if (keyPressed === "d") onClickAnswer("right");
     if (keyPressed === "a") onClickAnswer("wrong");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyPressed]);
 
   useEffect(() => {
@@ -49,17 +54,15 @@ const CardResults = ({
       }));
     }
 
-    const data = fs.readFileSync("src/data/decks.json");
-    const parsedDecks = JSON.parse(data);
-    const targetDeck = parsedDecks.find(
-      (deck: Deck) => deck.id === deckData.id
-    );
+    const newDecks = [...decks];
+
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
     const targetCard = targetDeck.cards.find(
       (card: Deck) => card.id === cardData.id
     );
     targetCard.lastResult = answer;
-    fs.writeFileSync("src/data/decks.json", JSON.stringify(parsedDecks));
-
+    setDecks(newDecks);
+    setSomethingChanged(true);
     onClickResult();
   };
 

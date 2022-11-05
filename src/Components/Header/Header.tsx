@@ -1,5 +1,6 @@
 import { Book, Settings } from "react-feather";
 import { Link } from "react-router-dom";
+import SaveChanges from "./SaveChanges";
 
 interface HeaderProps {
   title: string;
@@ -25,9 +26,7 @@ const Header = ({ title }: HeaderProps) => {
         <h1 className="text-4xl flex-1">{title}</h1>
       </div>
       <div className="flex-1 justify-end flex">
-        <div className="rounded-lg bg-gray-300 py-2 text-white px-4 cursor-pointer ">
-          Save changes
-        </div>
+        <SaveChanges />
       </div>
     </div>
   );

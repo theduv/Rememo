@@ -1,4 +1,5 @@
 import Header from "../Header/Header";
+import useDecksStore from "../../stores/decks";
 
 const Settings = () => {
   return (

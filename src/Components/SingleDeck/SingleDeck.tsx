@@ -28,27 +28,45 @@ const SingleDeck = () => {
     right: 0,
     wrong: 0,
   });
-  const [workSelected, setWorkSelected] = useState("none");
+  const [workSelected, setWorkSelected] = useState({
+    cards: "none",
+    canStart: false,
+    reverse: false,
+  });
   const [shuffledDeck, setShuffledDeck] = useState(
     deckCards.sort((a, b) => 0.5 - Math.random())
   );
   const [currentCard, setCurrentCard] = useState(0);
 
+  const onClickStartLearn = () => {
+    const targetCards = getWorkCards(workSelected.cards, deckCards);
+    setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
+    setWorkSelected(
+      (oldWork: { cards: string; canStart: boolean; reverse: boolean }) => ({
+        ...oldWork,
+        canStart: true,
+      })
+    );
+  };
+
   useEffect(() => {
     if (currentCard === 0) {
-      const targetCards = getWorkCards(workSelected, deckCards);
+      const targetCards = getWorkCards(workSelected.cards, deckCards);
       setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workSelected, currentCard]);
+  }, [currentCard]);
 
   return (
     <div>
       <Header title={deckData.name} />
       <div className="p-8 min-h-full">
         <div className="flex flex-col space-y-12 items-center justify-center h-full">
-          {workSelected === "none" ? (
-            <WorkSelect cards={deckCards} setWorkSelected={setWorkSelected} />
+          {workSelected.canStart === false ? (
+            <WorkSelect
+              setWorkSelected={setWorkSelected}
+              onClickStartLearn={onClickStartLearn}
+            />
           ) : currentCard < shuffledDeck.length && shuffledDeck.length ? (
             <div>
               <div className="text-xl text-center mb-8">

@@ -41,7 +41,6 @@ const SingleDeck = () => {
 
   useEffect(() => {
     if (workSelected.canStart === true) {
-      console.log("yes");
       ipcRenderer.send("changeDeck", {
         title: "Working",
         deck: deckData.name,
@@ -75,6 +74,7 @@ const SingleDeck = () => {
         <div className="flex flex-col space-y-12 items-center justify-center h-full">
           {workSelected.canStart === false ? (
             <WorkSelect
+              cards={deckCards}
               setWorkSelected={setWorkSelected}
               onClickStartLearn={onClickStartLearn}
             />

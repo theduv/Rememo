@@ -74,7 +74,7 @@ const CardsList = ({
 
   return (
     <div className="flex items-center p-6 border rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500">
-      <div className="grid grid-cols-2 mb-12 gap-x-4 gap-y-4 items-center">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-center">
         {cards
           .filter(
             (card) =>

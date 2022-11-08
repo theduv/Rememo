@@ -59,7 +59,8 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
     <div className="flex space-x-4 items-center justify-center">
       <input
         className={clsx("rounded-lg  py-2 px-4", {
-          "bg-gray-700 placeholder:text-gray-300": settings.darkMode,
+          "bg-gray-700 placeholder:text-gray-300 text-gray-200":
+            settings.darkMode,
           "bg-gray-200": settings.darkMode === false,
         })}
         placeholder="Front"
@@ -68,7 +69,8 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
       />
       <input
         className={clsx("rounded-lg  py-2 px-4", {
-          "bg-gray-700 placeholder:text-gray-300": settings.darkMode,
+          "bg-gray-700 placeholder:text-gray-300 text-gray-200":
+            settings.darkMode,
           "bg-gray-200": settings.darkMode === false,
         })}
         placeholder="Back"

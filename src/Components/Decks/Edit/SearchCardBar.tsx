@@ -18,8 +18,9 @@ const SearchCardBar = ({ valueSearch, setValueSearch }: SearchCardBarProps) => {
     <div className="flex space-x-4 items-center justify-center">
       <input
         placeholder="Search for a card"
-        className={clsx("rounded-lg bg-gray-200 py-2 px-4", {
+        className={clsx("rounded-lg  py-2 px-4", {
           "bg-gray-700 placeholder:text-gray-300": settings.darkMode,
+          "bg-gray-200": settings.darkMode === false,
         })}
         value={valueSearch}
         onChange={onChangeSearch}

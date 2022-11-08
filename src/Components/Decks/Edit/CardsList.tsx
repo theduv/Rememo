@@ -102,6 +102,16 @@ const CardsList = ({
     setSomethingChanged(true);
   };
 
+  const getFavColor = (isFav: boolean) => {
+    if (isFav) {
+      return "orange";
+    }
+    if (settings.darkMode) {
+      return "black";
+    }
+    return "white";
+  };
+
   return (
     <div
       style={{ minHeight: "69vmin", minWidth: "89vmin" }}
@@ -138,7 +148,7 @@ const CardsList = ({
                     className="cursor-pointer"
                     onClick={() => onClickFav(card)}
                   >
-                    <Star fill={card.fav ? "orange" : "white"} color="orange" />
+                    <Star fill={getFavColor(card.fav)} color="orange" />
                   </div>
                   <div
                     className="text-gray-500 cursor-pointer"

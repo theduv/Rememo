@@ -2,6 +2,7 @@ import { useState } from "react";
 import useDecksStore from "../../stores/decks";
 import useSettingsStore from "../../stores/settings";
 import LoadingSpin from "react-loading-spin";
+import { Save } from "react-feather";
 let appData = window.require("app-data-folder");
 const fs = window.require("fs");
 
@@ -24,9 +25,7 @@ const SaveChanges = () => {
   const somethingChanged = somethingChangedDecks || somethingChangedSettings;
 
   const getOtherClass = () => {
-    return somethingChanged
-      ? " bg-gray-800 cursor-pointer"
-      : " bg-gray-400 cursor-default ";
+    return somethingChanged ? " cursor-pointer" : " cursor-default ";
   };
 
   const onClickSave = () => {
@@ -44,9 +43,9 @@ const SaveChanges = () => {
   return (
     <div
       onClick={onClickSave}
-      className={"rounded-lg py-2 text-white px-4 w-32 " + getOtherClass()}
+      className={"rounded-lg py-2 text-white px-4" + getOtherClass()}
     >
-      {loading ? <LoadingSpin /> : <h1>Save changes</h1>}
+      {loading ? <LoadingSpin /> : <Save />}
     </div>
   );
 };

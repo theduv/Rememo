@@ -1,8 +1,10 @@
+import clsx from "clsx";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Star, Trash } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
+import useSettingsStore from "../../../stores/settings";
 import GlobalModal from "../../Shareable/GlobalModal";
 
 interface CardsListProps {
@@ -22,6 +24,7 @@ const CardsList = ({
   const deleteCard = useRef(false);
   const decks = useDecksStore((state: any) => state.decks);
   const setDecks = useDecksStore((state: any) => state.setDecks);
+  const settings = useSettingsStore((state: any) => state.settings);
   const setSomethingChanged = useDecksStore(
     (state: any) => state.setSomethingChanged
   );
@@ -102,7 +105,7 @@ const CardsList = ({
   return (
     <div
       style={{ minHeight: "69vmin", minWidth: "89vmin" }}
-      className="p-6 border rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500"
+      className="p-6 border border-gray-600 rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500"
     >
       <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-center">
         {cards
@@ -116,14 +119,18 @@ const CardsList = ({
               <input
                 type="text"
                 onChange={(e) => onChangeFront(card, e)}
-                className="py-1  px-3 rounded-lg"
+                className={clsx("py-1  px-3 rounded-lg", {
+                  "bg-gray-900 text-gray-200": settings.darkMode,
+                })}
                 value={card.front}
               />
               <div className="grid grid-cols-2 items-center">
                 <input
                   type="text"
                   onChange={(e) => onChangeBack(card, e)}
-                  className="py-1 px-3 rounded-lg"
+                  className={clsx("py-1  px-3 rounded-lg", {
+                    "bg-gray-900 text-gray-200": settings.darkMode,
+                  })}
                   value={card.back}
                 ></input>
                 <div className="flex items-center ml-24 space-x-3">
@@ -137,7 +144,9 @@ const CardsList = ({
                     className="text-gray-500 cursor-pointer"
                     onClick={() => onClickDelete(card)}
                   >
-                    <Trash />
+                    <Trash
+                      className={clsx({ "text-white": settings.darkMode })}
+                    />
                   </div>
                 </div>
               </div>

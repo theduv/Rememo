@@ -48,7 +48,7 @@ const WorkSelect = ({
       <label className="flex space-x-2 items-center">
         <h1>Cards to study</h1>
         <select
-          className="rounded-lg border border-gray-400"
+          className="rounded-lg border border-gray-400 text-gray-800"
           onChange={onChangeSelectCards}
         >
           <option value="all">All</option>

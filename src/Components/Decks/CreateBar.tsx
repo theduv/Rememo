@@ -1,11 +1,14 @@
+import clsx from "clsx";
 import React, { useState } from "react";
 import { Plus } from "react-feather";
 import { v4 as uuid } from "uuid";
 import useDecksStore from "../../stores/decks";
+import useSettingsStore from "../../stores/settings";
 
 const CreateBar = () => {
   const [deckName, setDeckName] = useState("");
   const decks = useDecksStore((state: any) => state.decks);
+  const settings = useSettingsStore((state: any) => state.settings);
   const setDecks = useDecksStore((state: any) => state.setDecks);
   const setSomethingChanged = useDecksStore(
     (state: any) => state.setSomethingChanged
@@ -25,10 +28,13 @@ const CreateBar = () => {
   };
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-4 items-center">
       <input
         placeholder="New deck name"
-        className="px-2 bg-gray-100 rounded-lg"
+        className={clsx("px-4 py-2 bg-gray-100 rounded-lg", {
+          "text-gray-900 bg-gray-700 placeholder:text-gray-300":
+            settings.darkMode,
+        })}
         value={deckName}
         onChange={onChangeName}
       />

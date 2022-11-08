@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
@@ -5,6 +6,7 @@ import { CheckCircle, XCircle } from "react-feather";
 import { Card } from "../../../../Interfaces/card.interface";
 import { Deck } from "../../../../Interfaces/deck.interface";
 import useDecksStore from "../../../../stores/decks";
+import useSettingsStore from "../../../../stores/settings";
 interface CardResultsProps {
   onClickResult: () => void;
   clickedShow: boolean;
@@ -22,6 +24,7 @@ const CardResults = ({
 }: CardResultsProps) => {
   const [keyPressed, setKeyPressed] = useState("undefined");
   const decks = useDecksStore((state: any) => state.decks);
+  const settings = useSettingsStore((state: any) => state.settings);
   const setDecks = useDecksStore((state: any) => state.setDecks);
   const setSomethingChanged = useDecksStore(
     (state: any) => state.setSomethingChanged
@@ -72,13 +75,17 @@ const CardResults = ({
         onClick={() => onClickAnswer("wrong")}
         width={32}
         height={32}
-        className="text-gray-500 cursor-pointer"
+        className={clsx("cursor-pointer ", {
+          "text-gray-500": settings.darkMode === false,
+        })}
       />
       <CheckCircle
         onClick={() => onClickAnswer("right")}
         width={32}
         height={32}
-        className="text-gray-500 cursor-pointer"
+        className={clsx("cursor-pointer ", {
+          "text-gray-500": settings.darkMode === false,
+        })}
       />
     </div>
   );

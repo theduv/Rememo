@@ -1,8 +1,10 @@
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Card } from "../../Interfaces/card.interface";
 import { Deck } from "../../Interfaces/deck.interface";
 import useDecksStore from "../../stores/decks";
+import useSettingsStore from "../../stores/settings";
 import Header from "../Header/Header";
 import DeckDone from "./DeckDone/DeckDone";
 import SingleCard from "./SingleCard/SingleCard";
@@ -23,6 +25,7 @@ const SingleDeck = () => {
   const params = useParams();
   const decks = useDecksStore((state: any) => state.decks);
   const deckID = params.id;
+  const settings = useSettingsStore((state: any) => state.settings);
   const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const deckCards = [...deckData.cards];
   const [currentResults, setCurrentResults] = useState({
@@ -68,10 +71,14 @@ const SingleDeck = () => {
   }, [currentCard]);
 
   return (
-    <div>
+    <div
+      className={clsx("h-full", {
+        "bg-gray-900 text-gray-200": settings.darkMode,
+      })}
+    >
       <Header title={deckData.name} />
-      <div className="p-8 min-h-full">
-        <div className="flex flex-col space-y-12 items-center justify-center h-full">
+      <div className="p-8">
+        <div className="flex flex-col space-y-12 items-center justify-center">
           {workSelected.canStart === false ? (
             <WorkSelect
               cards={deckCards}

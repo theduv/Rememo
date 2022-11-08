@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { Check } from "react-feather";
 import { uuid as v4 } from "uuidv4";
@@ -57,18 +58,25 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
   return (
     <div className="flex space-x-4 items-center justify-center">
       <input
-        className="rounded-lg bg-gray-200 py-2 px-4"
+        className={clsx("rounded-lg bg-gray-200 py-2 px-4", {
+          "bg-gray-700 placeholder:text-gray-300": settings.darkMode,
+        })}
         placeholder="Front"
         value={frontValue}
         onChange={onChangeFrontValue}
       />
       <input
-        className="rounded-lg bg-gray-200 py-2 px-4"
+        className={clsx("rounded-lg bg-gray-200 py-2 px-4", {
+          "bg-gray-700 placeholder:text-gray-300": settings.darkMode,
+        })}
         placeholder="Back"
         value={backValue}
         onChange={onChangeBackValue}
       />
-      <Check className="cursor-pointer" onClick={onClickCheck} />
+      <Check
+        className={clsx("cursor-pointer", { "text-white": settings.darkMode })}
+        onClick={onClickCheck}
+      />
     </div>
   );
 };

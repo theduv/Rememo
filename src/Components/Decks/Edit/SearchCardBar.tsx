@@ -1,5 +1,7 @@
+import clsx from "clsx";
 import React, { Dispatch, SetStateAction } from "react";
 import { Search } from "react-feather";
+import useSettingsStore from "../../../stores/settings";
 
 interface SearchCardBarProps {
   valueSearch: string;
@@ -7,6 +9,7 @@ interface SearchCardBarProps {
 }
 
 const SearchCardBar = ({ valueSearch, setValueSearch }: SearchCardBarProps) => {
+  const settings = useSettingsStore((state: any) => state.settings);
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearch(e.target.value);
   };
@@ -15,11 +18,13 @@ const SearchCardBar = ({ valueSearch, setValueSearch }: SearchCardBarProps) => {
     <div className="flex space-x-4 items-center justify-center">
       <input
         placeholder="Search for a card"
-        className="rounded-lg bg-gray-200 py-2 px-4"
+        className={clsx("rounded-lg bg-gray-200 py-2 px-4", {
+          "bg-gray-700 placeholder:text-gray-300": settings.darkMode,
+        })}
         value={valueSearch}
         onChange={onChangeSearch}
       />
-      <Search />
+      <Search className={clsx({ "text-white": settings.darkMode })} />
     </div>
   );
 };

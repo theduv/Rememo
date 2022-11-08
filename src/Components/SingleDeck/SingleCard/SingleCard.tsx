@@ -1,7 +1,9 @@
+import clsx from "clsx";
 import React, { useEffect } from "react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
+import useSettingsStore from "../../../stores/settings";
 import CardResults from "./CardResults/CardResults";
 
 interface SingleCardProps {
@@ -18,7 +20,7 @@ const SingleCard = ({
   setCurrentResults,
 }: SingleCardProps) => {
   const [clickedShow, setClickedShow] = useState(false);
-
+  const settings = useSettingsStore((state: any) => state.settings);
   const onClickShow = () => {
     setClickedShow(true);
   };
@@ -36,9 +38,13 @@ const SingleCard = ({
   };
 
   return (
-    <div className="flex flex-col space-y-12 items-center w-full h-full">
+    <div className="flex flex-col space-y-12 items-center w-full ">
       <div
-        className="border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96"
+        className={clsx(
+          "border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96",
+
+          { "bg-slate-800": settings.darkMode }
+        )}
         style={{ minWidth: 350 }}
       >
         <h1 className="m-auto text-3xl text-center">{cardData.front}</h1>

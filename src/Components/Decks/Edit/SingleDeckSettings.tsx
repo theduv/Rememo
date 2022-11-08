@@ -1,7 +1,9 @@
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
+import useSettingsStore from "../../../stores/settings";
 import Header from "../../Header/Header";
 import AddCardBar from "./AddCardBar";
 import CardsList from "./CardsList";
@@ -12,6 +14,7 @@ const SingleDeckSettings = () => {
   const params = useParams();
   const deckID = params.id;
   const decks = useDecksStore((state: any) => state.decks);
+  const settings = useSettingsStore((state: any) => state.settings);
   const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const [valueSearch, setValueSearch] = useState("");
   const [cards, setCards] = useState(deckData.cards);
@@ -24,7 +27,7 @@ const SingleDeckSettings = () => {
   }, []);
 
   return (
-    <div className="h-full">
+    <div className={clsx("h-full", { "bg-gray-900": settings.darkMode })}>
       <Header title={`Edit ${deckData.name}`} />
       <div className="flex flex-col space-y-4 h-4/5 items-center justify-center">
         <div className="flex flex-col items-center justify-center space-y-4 h-full ">

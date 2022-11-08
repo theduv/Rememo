@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 import useSettingsStore from "../../stores/settings";
 import Header from "../Header/Header";
@@ -16,7 +17,11 @@ const Settings = () => {
   };
 
   return (
-    <div>
+    <div
+      className={clsx("h-full", {
+        "bg-gray-900 text-gray-200": settings.darkMode,
+      })}
+    >
       <Header title={"Settings"} />
       <div className="p-12">
         <CheckableSetting

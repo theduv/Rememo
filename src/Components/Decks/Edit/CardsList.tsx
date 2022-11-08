@@ -72,8 +72,38 @@ const CardsList = ({
     setSomethingChanged(true);
   };
 
+  const onChangeFront = (card: Card, e: any) => {
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
+    const targetCards = targetDeck.cards;
+    const targetCard = targetCards.find(
+      (curCard: Card) => curCard.id === card.id
+    );
+    targetCard.front = e.target.value;
+    setCards(targetCards);
+    setDecks(newDecks);
+    setSomethingChanged(true);
+  };
+
+  const onChangeBack = (card: Card, e: any) => {
+    console.log(e.target.value);
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
+    const targetCards = targetDeck.cards;
+    const targetCard = targetCards.find(
+      (curCard: Card) => curCard.id === card.id
+    );
+    targetCard.back = e.target.value;
+    setCards(targetCards);
+    setDecks(newDecks);
+    setSomethingChanged(true);
+  };
+
   return (
-    <div className="flex items-center p-6 border rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500">
+    <div
+      style={{ minHeight: "69vmin", minWidth: "89vmin" }}
+      className="p-6 border rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500"
+    >
       <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-center">
         {cards
           .filter(
@@ -83,9 +113,19 @@ const CardsList = ({
           )
           .map((card) => (
             <>
-              <div className="py-1  px-3 rounded-lg">{card.front}</div>
+              <input
+                type="text"
+                onChange={(e) => onChangeFront(card, e)}
+                className="py-1  px-3 rounded-lg"
+                value={card.front}
+              />
               <div className="grid grid-cols-2 items-center">
-                <div className="py-1 px-3 rounded-lg">{card.back}</div>
+                <input
+                  type="text"
+                  onChange={(e) => onChangeBack(card, e)}
+                  className="py-1 px-3 rounded-lg"
+                  value={card.back}
+                ></input>
                 <div className="flex items-center ml-24 space-x-3">
                   <div
                     className="cursor-pointer"

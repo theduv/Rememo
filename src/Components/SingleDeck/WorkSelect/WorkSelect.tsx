@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
+import InputCheckbox from "../../Shareable/InputCheckbox";
 
 interface WorkSelectProps {
   setWorkSelected: Dispatch<
@@ -62,12 +63,12 @@ const WorkSelect = ({
         typing: e.target.checked,
       })
     );
-    return; //does nothing for the moment
+    return;
   };
 
   return (
-    <div className="flex space-y-4 flex-col justify-center ">
-      <label className="flex space-x-2 items-center">
+    <div className="flex space-y-8 flex-col justify-center text-3xl ">
+      <label className="flex space-x-6 items-center">
         <h1>Cards to study</h1>
         <select
           className="rounded-lg border border-gray-400 text-gray-800"
@@ -78,18 +79,22 @@ const WorkSelect = ({
           <option value="wrong">Wrong</option>
         </select>
       </label>
-      <label className="flex space-x-2 items-center">
+      <label className="flex space-x-6 items-center">
         <h1>Randomly reverse</h1>
-        <input type="checkbox" checked={reverse} onChange={onChangeReverse} />
+        <div>
+          <InputCheckbox checked={reverse} onChange={onChangeReverse} />
+        </div>
       </label>
-      <label className="flex space-x-2 items-center">
+      <label className="flex space-x-6 items-center">
         <h1>Typing</h1>
-        <input type="checkbox" checked={typing} onChange={onClickTyping} />
+        <div>
+          <InputCheckbox checked={typing} onChange={onClickTyping} />
+        </div>
       </label>
       <div className="font-bold">Cards : {count}</div>
       <button
         onClick={onClickStartLearn}
-        className="rounded-lg w-4/5 px-4 py-2 bg-gray-600 font-bold text-white"
+        className="rounded-lg w-4/5 px-4 py-4 bg-gray-600 font-bold text-white"
       >
         Start learning
       </button>

@@ -36,6 +36,7 @@ const SingleDeck = () => {
     cards: "none",
     canStart: false,
     reverse: false,
+    typing: false,
   });
   const [shuffledDeck, setShuffledDeck] = useState(
     deckCards.sort((a, b) => 0.5 - Math.random())
@@ -49,13 +50,19 @@ const SingleDeck = () => {
         deck: deckData.name,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workSelected]);
 
   const onClickStartLearn = () => {
     const targetCards = getWorkCards(workSelected.cards, deckCards);
     setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
     setWorkSelected(
-      (oldWork: { cards: string; canStart: boolean; reverse: boolean }) => ({
+      (oldWork: {
+        cards: string;
+        canStart: boolean;
+        reverse: boolean;
+        typing: boolean;
+      }) => ({
         ...oldWork,
         canStart: true,
       })
@@ -87,11 +94,12 @@ const SingleDeck = () => {
             />
           ) : currentCard < shuffledDeck.length && shuffledDeck.length ? (
             <div>
-              <div className="text-xl text-center mb-8">
+              <div className="text-4xl text-center mb-8">
                 {currentCard + 1} / {shuffledDeck.length}
               </div>
               <SingleCard
                 setCurrentResults={setCurrentResults}
+                typing={workSelected.typing}
                 deckData={deckData}
                 cardData={shuffledDeck[currentCard]}
                 setCurrentCard={setCurrentCard}
@@ -102,6 +110,7 @@ const SingleDeck = () => {
               setCurrentCard={setCurrentCard}
               currentResults={currentResults}
               setCurrentResults={setCurrentResults}
+              isTyping={workSelected.typing}
             />
           )}
         </div>

@@ -3,7 +3,12 @@ import { Card } from "../../../Interfaces/card.interface";
 
 interface WorkSelectProps {
   setWorkSelected: Dispatch<
-    SetStateAction<{ cards: string; canStart: boolean; reverse: boolean }>
+    SetStateAction<{
+      cards: string;
+      canStart: boolean;
+      reverse: boolean;
+      typing: boolean;
+    }>
   >;
   onClickStartLearn: () => void;
   cards: Array<Card>;
@@ -15,6 +20,7 @@ const WorkSelect = ({
   cards,
 }: WorkSelectProps) => {
   const [reverse, setReverse] = useState(false);
+  const [typing, setTyping] = useState(false);
   const [count, setCount] = useState(cards.length);
 
   const onChangeSelectCards = (e: any) => {
@@ -32,7 +38,12 @@ const WorkSelect = ({
       );
     }
     setWorkSelected(
-      (oldWork: { cards: string; canStart: boolean; reverse: boolean }) => ({
+      (oldWork: {
+        cards: string;
+        canStart: boolean;
+        reverse: boolean;
+        typing: boolean;
+      }) => ({
         ...oldWork,
         cards: newWork,
       })
@@ -43,8 +54,19 @@ const WorkSelect = ({
     return; //does nothing for the moment
   };
 
+  const onClickTyping = (e: any) => {
+    setTyping(e.target.checked);
+    setWorkSelected(
+      (oldWork: { cards: string; canStart: boolean; reverse: boolean }) => ({
+        ...oldWork,
+        typing: e.target.checked,
+      })
+    );
+    return; //does nothing for the moment
+  };
+
   return (
-    <div className="flex  space-y-4 flex-col justify-center ">
+    <div className="flex space-y-4 flex-col justify-center ">
       <label className="flex space-x-2 items-center">
         <h1>Cards to study</h1>
         <select
@@ -59,6 +81,10 @@ const WorkSelect = ({
       <label className="flex space-x-2 items-center">
         <h1>Randomly reverse</h1>
         <input type="checkbox" checked={reverse} onChange={onChangeReverse} />
+      </label>
+      <label className="flex space-x-2 items-center">
+        <h1>Typing</h1>
+        <input type="checkbox" checked={typing} onChange={onClickTyping} />
       </label>
       <div className="font-bold">Cards : {count}</div>
       <button

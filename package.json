@@ -33,6 +33,7 @@
     "react-scripts": "5.0.0",
     "react-testing-library": "^8.0.1",
     "react-tooltip": "^4.4.3",
+    "tailwind-scrollbar": "^2.0.1",
     "typescript": "^4.8.4",
     "util": "^0.12.5",
     "uuidv4": "^6.2.13",

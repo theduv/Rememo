@@ -26,8 +26,8 @@ const SingleDeckSettings = () => {
   return (
     <div className="h-full">
       <Header title={`Edit ${deckData.name}`} />
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 h-4/5 items-center justify-center">
+        <div className="flex flex-col items-center justify-center space-y-4 h-full ">
           <SearchCardBar
             valueSearch={valueSearch}
             setValueSearch={setValueSearch}

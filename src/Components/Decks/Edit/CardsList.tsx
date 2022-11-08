@@ -73,8 +73,8 @@ const CardsList = ({
   };
 
   return (
-    <div className="flex items-center justify-center mt-8 max-w-1/4 overflow-y-auto">
-      <div className="grid grid-cols-2 mb-12 gap-y-4 items-center w-1/3">
+    <div className="flex items-center p-6 border rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500">
+      <div className="grid grid-cols-2 mb-12 gap-x-4 gap-y-4 items-center">
         {cards
           .filter(
             (card) =>
@@ -83,10 +83,10 @@ const CardsList = ({
           )
           .map((card) => (
             <>
-              <div className="py-1 px-3 rounded-lg">{card.front}</div>
+              <div className="py-1  px-3 rounded-lg">{card.front}</div>
               <div className="grid grid-cols-2 items-center">
                 <div className="py-1 px-3 rounded-lg">{card.back}</div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center ml-24 space-x-3">
                   <div
                     className="cursor-pointer"
                     onClick={() => onClickFav(card)}

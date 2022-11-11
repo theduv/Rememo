@@ -19,8 +19,6 @@ const SingleCard = ({
   deckData,
   setCurrentResults,
 }: SingleCardProps) => {
-  console.log(typing);
-
   return typing ? (
     <TypingCard
       cardData={cardData}

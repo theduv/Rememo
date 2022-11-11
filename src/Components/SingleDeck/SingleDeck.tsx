@@ -55,7 +55,15 @@ const SingleDeck = () => {
 
   const onClickStartLearn = () => {
     const targetCards = getWorkCards(workSelected.cards, deckCards);
-    setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
+    if (workSelected.reverse) {
+      setShuffledDeck(
+        targetCards
+          .map((card) => ({ ...card, front: card.back, back: card.front }))
+          .sort((a, b) => 0.5 - Math.random())
+      );
+    } else {
+      setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
+    }
     setWorkSelected(
       (oldWork: {
         cards: string;

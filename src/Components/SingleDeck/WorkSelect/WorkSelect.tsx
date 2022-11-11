@@ -50,6 +50,7 @@ const WorkSelect = ({
         ...oldWork,
         cards: cardsLearn,
         typing,
+        reverse,
       })
     );
   }, [typing, reverse, cardsLearn]);

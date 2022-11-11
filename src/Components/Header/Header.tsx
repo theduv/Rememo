@@ -44,9 +44,19 @@ const Header = ({ title }: HeaderProps) => {
       </div>
       <div className="flex-1 justify-end flex items-center space-x-2">
         {settings.darkMode ? (
-          <Sun className="cursor-pointer" onClick={onClickSun} />
+          <Sun
+            className="cursor-pointer"
+            onClick={onClickSun}
+            height={33}
+            width={33}
+          />
         ) : (
-          <Moon className="cursor-pointer" onClick={onClickMoon} />
+          <Moon
+            className="cursor-pointer"
+            onClick={onClickMoon}
+            height={33}
+            width={33}
+          />
         )}
         <SaveChanges />
       </div>

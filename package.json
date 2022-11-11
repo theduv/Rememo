@@ -69,6 +69,7 @@
     "concurrently": "^7.5.0",
     "electron": "^21.2.0",
     "electron-is-dev": "^2.0.0",
+    "electron-wix-msi": "^5.0.0",
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.18",
     "wait-on": "^6.0.1",

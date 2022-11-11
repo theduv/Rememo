@@ -25,7 +25,7 @@ const SaveChanges = () => {
   const somethingChanged = somethingChangedDecks || somethingChangedSettings;
 
   const getOtherClass = () => {
-    return somethingChanged ? " cursor-pointer" : " cursor-default ";
+    return somethingChanged ? "cursor-pointer" : "cursor-default ";
   };
 
   const onClickSave = () => {
@@ -45,7 +45,7 @@ const SaveChanges = () => {
       onClick={onClickSave}
       className={"rounded-lg py-2 text-white px-4" + getOtherClass()}
     >
-      {loading ? <LoadingSpin /> : <Save />}
+      {loading ? <LoadingSpin /> : <Save height={33} width={33} />}
     </div>
   );
 };

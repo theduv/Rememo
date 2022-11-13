@@ -51,7 +51,6 @@ const CardsList = ({
         curCard.back !== cardRef.current.back
     );
     targetDeck.cards = newCards;
-    targetDeck.numberOfCards--;
     setDecks(newDecks);
     setCards(newCards);
   };

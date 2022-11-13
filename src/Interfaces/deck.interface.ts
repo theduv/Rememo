@@ -4,5 +4,4 @@ export interface Deck {
   id: string;
   cards: Array<Card>;
   name: string;
-  numberOfCards: number;
 }

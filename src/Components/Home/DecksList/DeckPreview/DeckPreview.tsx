@@ -17,7 +17,7 @@ const DeckPreview = ({ deck }: DeckPreviewProps) => {
         <div className="truncate">{deck.name}</div>
         <div className="flex items-center space-x-2 text-base">
           <Book height={20} width={20} />
-          <h1 className="text-2xl ">{deck.numberOfCards}</h1>
+          <h1 className="text-2xl ">{deck.cards.length}</h1>
         </div>
       </button>
       <ReactTooltip />

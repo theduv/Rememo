@@ -21,7 +21,7 @@ const CreateBar = () => {
   const onClickPlus = () => {
     if (deckName.length === 0) return;
     const oldDecks = [...decks];
-    oldDecks.push({ id: uuid(), name: deckName, numberOfCards: 0, cards: [] });
+    oldDecks.push({ id: uuid(), name: deckName, cards: [] });
     setDecks([...oldDecks]);
     setSomethingChanged(true);
     setDeckName("");

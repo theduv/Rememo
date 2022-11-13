@@ -32,7 +32,7 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
         </h1>
       </Link>
       <h1 className="text-sm">
-        {deck.numberOfCards} card{deck.numberOfCards > 1 ? "s" : ""}
+        {deck.cards.length} card{deck.cards.length > 1 ? "s" : ""}
       </h1>
       <XCircle
         className="text-gray-400 cursor-pointer"

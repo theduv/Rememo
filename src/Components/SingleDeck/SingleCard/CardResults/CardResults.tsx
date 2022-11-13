@@ -38,7 +38,7 @@ const CardResults = ({
 
   useEffect(() => {
     document.addEventListener("keydown", (event: KeyboardEvent) => {
-      setKeyPressed(event.key);
+      setKeyPressed(event.key.toLowerCase());
     });
   });
 

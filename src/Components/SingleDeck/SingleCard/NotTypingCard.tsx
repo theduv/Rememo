@@ -26,7 +26,8 @@ const NotTypingCard = ({
 
   useEffect(() => {
     document.addEventListener("keydown", (event: KeyboardEvent) => {
-      if (event.key === "w" || event.key === "s") {
+      const key = event.key.toLowerCase();
+      if (key === "w" || key === "s") {
         setClickedShow(true);
       }
     });

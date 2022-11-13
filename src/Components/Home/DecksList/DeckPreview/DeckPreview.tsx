@@ -12,12 +12,12 @@ const DeckPreview = ({ deck }: DeckPreviewProps) => {
     <Link to={`/deck/${deck.id}`}>
       <button
         data-tip={deck.name}
-        className="w-96 flex text-4xl items-center justify-between overflow-ellipsis bg-gray-600 text-white rounded-lg px-4 py-2"
+        className="w-72 flex text-2xl items-center justify-between bg-slate-600 text-white rounded-2xl space-x-4 px-4 py-2.5"
       >
-        {deck.name}
+        <div className="truncate">{deck.name}</div>
         <div className="flex items-center space-x-2 text-base">
-          <Book height={30} width={30} />
-          <h1 className="text-4xl">{deck.numberOfCards}</h1>
+          <Book height={20} width={20} />
+          <h1 className="text-2xl ">{deck.numberOfCards}</h1>
         </div>
       </button>
       <ReactTooltip />

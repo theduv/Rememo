@@ -11,7 +11,7 @@ const DecksList = ({}: DecksListProps) => {
   return (
     <div className="flex flex-col justify-center items-center space-y-4">
       {decks.length ? (
-        decks.map((deck: Deck) => <DeckPreview deck={deck} />)
+        decks.map((deck: Deck) => <DeckPreview key={deck.id} deck={deck} />)
       ) : (
         <div>
           You didn't create a deck yet.{" "}

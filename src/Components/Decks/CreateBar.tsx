@@ -32,7 +32,7 @@ const CreateBar = () => {
       <input
         placeholder="New deck name"
         className={clsx("px-4 py-2 bg-gray-100 rounded-lg", {
-          "text-gray-900 bg-gray-700 placeholder:text-gray-300":
+          "text-gray-200 bg-gray-700 placeholder:text-gray-200 ":
             settings.darkMode,
         })}
         value={deckName}

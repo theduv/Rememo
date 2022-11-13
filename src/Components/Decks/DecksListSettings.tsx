@@ -8,7 +8,7 @@ const DecksListSettings = () => {
   return (
     <div className="flex flex-col space-y-2">
       {decks.map((deck: Deck) => (
-        <DeckPreviewSettings deck={deck} />
+        <DeckPreviewSettings key={deck.id} deck={deck} />
       ))}
     </div>
   );

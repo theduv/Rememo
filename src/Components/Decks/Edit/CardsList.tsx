@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, Fragment, SetStateAction, useRef, useState } from "react";
 import { Star, Trash } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
@@ -113,7 +113,7 @@ const CardsList = ({
 
   return (
     <div
-      style={{ minHeight: "69vmin", minWidth: "89vmin" }}
+      style={{ minHeight: "69vmin", minWidth: "89vmin", maxWidth: "80%" }}
       className="p-6 border border-gray-600 rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500"
     >
       <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-center">
@@ -124,7 +124,7 @@ const CardsList = ({
               card.back.toLowerCase().includes(valueSearch.toLowerCase())
           )
           .map((card) => (
-            <>
+            <Fragment key={card.id}>
               <input
                 type="text"
                 onChange={(e) => onChangeFront(card, e)}
@@ -159,7 +159,7 @@ const CardsList = ({
                   </div>
                 </div>
               </div>
-            </>
+            </Fragment>
           ))}
       </div>
       <GlobalModal

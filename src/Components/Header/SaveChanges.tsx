@@ -32,11 +32,12 @@ const SaveChanges = () => {
 
   const onClickSave = () => {
     setLoading(true);
+
     fs.writeFileSync(
       appData("Rememo") + "\\settings.json",
       JSON.stringify(settings)
     );
-    fs.writeFileSync(appData("Rememo") + "\\decks.json", JSON.stringify(decks));
+    fs.writeFileSync(appData("Rememo") + "/decks.json", JSON.stringify(decks));
     setSomethingChangedDecks(false);
     setSomethingChangedSettings(false);
     setLoading(false);

@@ -40,7 +40,6 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
     const newDecks = [...decks];
     const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
     targetDeck.cards = newCards;
-    targetDeck.numberOfCards++;
     setDecks(newDecks);
     setSomethingChanged(true);
     setBackValue("");

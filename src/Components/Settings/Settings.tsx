@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
 import useSettingsStore from "../../stores/settings";
 import Header from "../Header/Header";
 import CheckableSetting from "./CheckableSetting";
@@ -10,6 +10,13 @@ const Settings = () => {
   const setSomethingChanged = useSettingsStore(
     (state: any) => state.setSomethingChanged
   );
+  const [valueExport, setValueExport] = useState(settings.pathExport);
+
+  const onChangeValueExport = (event: any) => {
+    setValueExport(event.target.value);
+    setSettings({ ...settings, pathExport: event.target.value });
+    setSomethingChanged(true);
+  };
 
   const onChangeFavOnAdd = (event: React.ChangeEvent) => {
     setSettings({ ...settings, favOnAdd: !settings.favOnAdd });
@@ -28,6 +35,15 @@ const Settings = () => {
           content="Fav card on create"
           isChecked={settings.favOnAdd}
           onChange={onChangeFavOnAdd}
+        />
+      </div>
+      <div className="px-12 flex items-center space-x-4">
+        <h1 className="text-xl">Export path</h1>
+        <input
+          value={valueExport}
+          onChange={onChangeValueExport}
+          type="text"
+          className="rounded-lg p-1 border bg-gray-500 text-gray"
         />
       </div>
     </div>

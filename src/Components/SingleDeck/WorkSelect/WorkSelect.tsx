@@ -1,12 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
-import InputCheckbox from "../../Shareable/InputCheckbox";
 import { TbArrowsShuffle } from "react-icons/tb";
 import { BsCardList } from "react-icons/bs";
 import SelectButton from "./SelectButton";
 import { FaKeyboard } from "react-icons/fa";
-import { Star, X, XCircle } from "react-feather";
-import ReactTooltip from "react-tooltip";
+import { Star, XCircle } from "react-feather";
 interface WorkSelectProps {
   setWorkSelected: Dispatch<
     SetStateAction<{
@@ -53,6 +51,7 @@ const WorkSelect = ({
         reverse,
       })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typing, reverse, cardsLearn]);
 
   const onClickCard = (type: string) => {

@@ -3,9 +3,7 @@ import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
 import DeckPreview from "./DeckPreview/DeckPreview";
 
-interface DecksListProps {}
-
-const DecksList = ({}: DecksListProps) => {
+const DecksList = () => {
   const decks = useDecksStore((state: any) => state.decks);
 
   return (

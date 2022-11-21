@@ -24,6 +24,7 @@ const SingleDeckSettings = () => {
       title: `Editing ${deckData.name}`,
       deck: "undefined",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

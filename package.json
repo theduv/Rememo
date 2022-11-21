@@ -30,6 +30,8 @@
     "react-testing-library": "^8.0.1",
     "react-toastify": "^9.1.1",
     "react-tooltip": "^4.4.3",
+    "reshake": "^1.2.4",
+    "styled-components": "^5.3.6",
     "tailwind-scrollbar": "^2.0.1",
     "typescript": "^4.8.4",
     "util": "^0.12.5",

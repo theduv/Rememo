@@ -1,30 +1,30 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
-import { Deck } from "../../../Interfaces/deck.interface";
 
 interface TypingCardProps {
   cardData: Card;
+  setLives: Dispatch<SetStateAction<{ max: number; left: number }>>;
   setCurrentCard: Dispatch<SetStateAction<number>>;
-  deckData: Deck;
-  setCurrentResults: Dispatch<SetStateAction<{ right: number; wrong: number }>>;
 }
 
 const TypingCard = ({
   cardData,
   setCurrentCard,
-  deckData,
-  setCurrentResults,
+  setLives,
 }: TypingCardProps) => {
   const [arrayBack, setArrayBack] = useState(cardData.back.split(""));
   const [value, setValue] = useState("");
   const currentKey = useRef(0);
+  const processing = useRef(false);
 
   useEffect(() => {
     setArrayBack(cardData.back.split(""));
     if (value.toLowerCase() === cardData.back.toLowerCase()) {
-      setValue("");
-      setCurrentCard((oldCard) => oldCard + 1);
-      currentKey.current = 0;
+      setTimeout(() => {
+        setValue("");
+        setCurrentCard((oldCard) => oldCard + 1);
+        currentKey.current = 0;
+      }, 500);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, cardData]);
@@ -34,9 +34,19 @@ const TypingCard = ({
     const letters = e.target.value.split("");
     const lastLetter = letters[letters.length - 1];
 
+    if (processing.current) return;
     if (lastLetter && lastLetter.toLowerCase() === goodLetter.toLowerCase()) {
       setValue(e.target.value.toUpperCase());
       currentKey.current++;
+    } else {
+      processing.current = true;
+      const oldValue = value;
+      setValue(e.target.value.toUpperCase());
+      setTimeout(() => {
+        setLives((oldLives) => ({ ...oldLives, left: oldLives.left - 1 }));
+        setValue(oldValue);
+        processing.current = false;
+      }, 500);
     }
   };
 

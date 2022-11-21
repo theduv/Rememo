@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { Heart } from "react-feather";
 import { useParams } from "react-router";
 import { Card } from "../../Interfaces/card.interface";
 import { Deck } from "../../Interfaces/deck.interface";
@@ -7,6 +8,7 @@ import useDecksStore from "../../stores/decks";
 import useSettingsStore from "../../stores/settings";
 import Header from "../Header/Header";
 import DeckDone from "./DeckDone/DeckDone";
+import HealthBar from "./HealthBar";
 import SingleCard from "./SingleCard/SingleCard";
 import WorkSelect from "./WorkSelect/WorkSelect";
 const ipcRenderer = window.require("electron").ipcRenderer;
@@ -23,6 +25,7 @@ const getWorkCards = (workSelected: string, cards: Array<Card>) => {
 
 const SingleDeck = () => {
   const params = useParams();
+  const [lives, setLives] = useState({ max: 3, left: 3 });
   const decks = useDecksStore((state: any) => state.decks);
   const deckID = params.id;
   const settings = useSettingsStore((state: any) => state.settings);
@@ -101,11 +104,14 @@ const SingleDeck = () => {
               onClickStartLearn={onClickStartLearn}
             />
           ) : currentCard < shuffledDeck.length && shuffledDeck.length ? (
-            <div>
-              <div className="text-4xl text-center mb-8">
+            <div className="flex flex-col items-center">
+              {workSelected.typing && <HealthBar lives={lives} />}
+              <div className="text-4xl text-center">
                 {currentCard + 1} / {shuffledDeck.length}
               </div>
               <SingleCard
+                lives={lives}
+                setLives={setLives}
                 setCurrentResults={setCurrentResults}
                 typing={workSelected.typing}
                 deckData={deckData}

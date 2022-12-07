@@ -106,7 +106,7 @@ const SingleDeck = () => {
           ) : currentCard < shuffledDeck.length && shuffledDeck.length ? (
             <div className="flex flex-col items-center">
               {workSelected.typing && <HealthBar lives={lives} />}
-              <div className="text-4xl text-center">
+              <div className="text-4xl text-center mb-12">
                 {currentCard + 1} / {shuffledDeck.length}
               </div>
               <SingleCard

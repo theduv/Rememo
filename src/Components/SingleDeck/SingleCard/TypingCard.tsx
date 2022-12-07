@@ -30,7 +30,7 @@ const TypingCard = ({
   }, [value, cardData]);
 
   const onChangeInput = (e: any) => {
-    const goodLetter = arrayBack[currentKey.current];
+const goodLetter = arrayBack[currentKey.current];
     const letters = e.target.value.split("");
     const lastLetter = letters[letters.length - 1];
 

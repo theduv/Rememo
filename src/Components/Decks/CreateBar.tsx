@@ -84,7 +84,7 @@ const CreateBar = () => {
         ref={fileRef}
         type="file"
         style={{ display: "none" }}
-        accept=".djson"
+        accept=".d.json"
       />
       <ToastContainer
         position="bottom-right"

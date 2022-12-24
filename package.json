@@ -1,5 +1,5 @@
 {
-  "name": "ttt",
+  "name": "rememo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -46,7 +46,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn:electron\"",
-    "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://127.0.0.1:3000 && electron .\"",
     "electron": "wait-on tcp:3000 && electron ."
   },
   "eslintConfig": {
@@ -77,7 +77,7 @@
     "electron-wix-msi": "^5.0.0",
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.18",
-    "wait-on": "^6.0.1",
+    "wait-on": "^7.0.1",
     "webpack-cli": "^4.10.0"
   }
 }

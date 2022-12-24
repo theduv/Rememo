@@ -4,6 +4,7 @@ const isDev = require("electron-is-dev");
 const discordRPC = require("discord-rpc");
 
 const clientId = "1038474817256562778";
+console.log("loading");
 
 let win;
 let details = { title: "Main menu", deck: "undefined" };
@@ -27,14 +28,17 @@ function createWindow() {
   win.loadURL(
     isDev
       ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
+      : `file://${path.join(__dirname, "index.html")}`
   );
   if (isDev) {
     win.webContents.openDevTools({ mode: "detach" });
   }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  console.log("created window");
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -62,6 +66,7 @@ async function setActivity() {
     largeImageKey: "rememo",
     largeImageText: "rememo",
     instance: false,
+    state: null,
   };
   if (details.deck !== "undefined") {
     activity.state = details.deck;

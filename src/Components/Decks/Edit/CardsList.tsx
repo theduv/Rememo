@@ -133,11 +133,11 @@ const CardsList = ({
                 })}
                 value={card.front}
               />
-              <div className="grid grid-cols-2 items-center">
+              <div className="flex items-center">
                 <input
                   type="text"
                   onChange={(e) => onChangeBack(card, e)}
-                  className={clsx("py-1  px-3 rounded-lg", {
+                  className={clsx("py-1 px-3 rounded-lg w-full", {
                     "bg-gray-900 text-gray-200": settings.darkMode,
                   })}
                   value={card.back}

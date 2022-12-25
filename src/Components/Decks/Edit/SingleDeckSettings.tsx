@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
 import useSettingsStore from "../../../stores/settings";
@@ -17,7 +18,7 @@ const SingleDeckSettings = () => {
   const settings = useSettingsStore((state: any) => state.settings);
   const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const [valueSearch, setValueSearch] = useState("");
-  const [cards, setCards] = useState(deckData.cards);
+  const [cards, setCards] = useState<Array<Card>>(deckData.cards);
 
   useEffect(() => {
     ipcRenderer.send("editing", {
@@ -40,7 +41,9 @@ const SingleDeckSettings = () => {
         </div>
         <CardsList
           valueSearch={valueSearch}
-          cards={cards}
+          cards={cards.sort((a: Card, b: Card) =>
+            a.front.localeCompare(b.front)
+          )}
           setCards={setCards}
           deckData={deckData}
         />

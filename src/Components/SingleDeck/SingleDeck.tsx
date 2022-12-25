@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { Heart } from "react-feather";
 import { useParams } from "react-router";
 import { Card } from "../../Interfaces/card.interface";
 import { Deck } from "../../Interfaces/deck.interface";
@@ -27,6 +26,7 @@ const SingleDeck = () => {
   const params = useParams();
   const [lives, setLives] = useState({ max: 3, left: 3 });
   const decks = useDecksStore((state: any) => state.decks);
+  const [startTime, setStartTime] = useState(new Date());
   const deckID = params.id;
   const settings = useSettingsStore((state: any) => state.settings);
   const deckData = decks.find((deck: Deck) => deck.id === deckID);
@@ -67,6 +67,7 @@ const SingleDeck = () => {
     } else {
       setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
     }
+    setStartTime(new Date());
     setWorkSelected(
       (oldWork: {
         cards: string;
@@ -125,6 +126,7 @@ const SingleDeck = () => {
               currentResults={currentResults}
               setCurrentResults={setCurrentResults}
               isTyping={workSelected.typing}
+              startTime={startTime}
             />
           )}
         </div>

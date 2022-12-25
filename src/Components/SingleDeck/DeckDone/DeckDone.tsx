@@ -28,7 +28,11 @@ const DeckDone = ({
       {isTyping ? (
         <div>
           <h1>You completed this deck !</h1>
-          <h1>Completion time: {finalTime}</h1>
+          <h1>
+            Completion time:{" "}
+            {new Date(finalTime).getMinutes().toString().padStart(2, "0")}:
+            {new Date(finalTime).getSeconds().toString().padStart(2, "0")}
+          </h1>
         </div>
       ) : (
         <h1>

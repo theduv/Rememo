@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useCallback } from "react";
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { CheckCircle, XCircle } from "react-feather";
@@ -22,7 +22,6 @@ const CardResults = ({
   cardData,
   setCurrentResults,
 }: CardResultsProps) => {
-  const [keyPressed, setKeyPressed] = useState("undefined");
   const decks = useDecksStore((state: any) => state.decks);
   const settings = useSettingsStore((state: any) => state.settings);
   const setDecks = useDecksStore((state: any) => state.setDecks);
@@ -30,19 +29,7 @@ const CardResults = ({
     (state: any) => state.setSomethingChanged
   );
 
-  useEffect(() => {
-    if (keyPressed === "d") onClickAnswer("right");
-    if (keyPressed === "a") onClickAnswer("wrong");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyPressed]);
-
-  useEffect(() => {
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      setKeyPressed(event.key.toLowerCase());
-    });
-  });
-
-  const onClickAnswer = (answer: string) => {
+  const onClickAnswer = useCallback((answer: string) => {
     if (!clickedShow) return;
 
     if (answer === "right") {
@@ -67,7 +54,22 @@ const CardResults = ({
     setDecks(newDecks);
     setSomethingChanged(true);
     onClickResult();
-  };
+  }, [cardData.id, clickedShow, deckData.id, decks, onClickResult, setCurrentResults, setDecks, setSomethingChanged]);
+
+  const kdbHandler = useCallback((event: KeyboardEvent) => {
+    switch (event.key.toLowerCase()) {
+      case "d":
+        onClickAnswer("right");
+        break;
+      case "a":
+        onClickAnswer("wrong");
+        break;
+    };
+  }, [onClickAnswer]);
+  useEffect(() => {
+    document.addEventListener("keydown", kdbHandler);
+    return () => document.removeEventListener("keydown", kdbHandler);
+  }, [kdbHandler]);
 
   return (
     <div className="flex space-x-12 justify-center">

@@ -1,9 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import useSetAndGetCurrentDeck from "../../../Hooks/useSetAndGetCurrentDeck";
 import { Card } from "../../../Interfaces/card.interface";
-import { Deck } from "../../../Interfaces/deck.interface";
-import useDecksStore from "../../../stores/decks";
 import useSettingsStore from "../../../stores/settings";
 import Header from "../../Header/Header";
 import AddCardBar from "./AddCardBar";
@@ -12,11 +10,9 @@ import SearchCardBar from "./SearchCardBar";
 const ipcRenderer = window.require("electron").ipcRenderer;
 
 const SingleDeckSettings = () => {
-  const params = useParams();
-  const deckID = params.id;
-  const decks = useDecksStore((state: any) => state.decks);
+  const deckData = useSetAndGetCurrentDeck()
+
   const settings = useSettingsStore((state: any) => state.settings);
-  const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const [valueSearch, setValueSearch] = useState("");
   const [cards, setCards] = useState<Array<Card>>(deckData.cards);
 
@@ -25,8 +21,7 @@ const SingleDeckSettings = () => {
       title: `Editing ${deckData.name}`,
       deck: "undefined",
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [deckData]);
 
   return (
     <div className={clsx("h-full", { "bg-gray-900": settings.darkMode })}>

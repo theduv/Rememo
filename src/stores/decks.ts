@@ -6,7 +6,14 @@ let appData = window.require("app-data-folder");
 const data = fs.readFileSync(appData("Rememo") + "/decks.json");
 const parsedData = JSON.parse(data);
 
-const useDecksStore = create((set) => ({
+interface DecksStoreInterface {
+  somethingChanged: boolean,
+  setSomethingChanged: (value: boolean) => void,
+  decks: Deck[],
+  setDecks: (newValue: Deck[]) => void
+}
+
+const useDecksStore = create<DecksStoreInterface>((set) => ({
   somethingChanged: false,
   setSomethingChanged: (value: boolean) =>
     set((state: { somethingChanged: boolean }) => ({

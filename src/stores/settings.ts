@@ -1,9 +1,24 @@
 import create from "zustand";
+import { Deck } from "../Interfaces/deck.interface";
 const fs = window.require("fs");
 let appData = window.require("app-data-folder");
 
-const data = fs.readFileSync(appData("Rememo") + "/settings.json");
-const parsedData = JSON.parse(data);
+const folderPath = appData("Rememo");
+const filePath = folderPath + "/settings.json";
+
+let parsedData: Array<Deck> = [];
+
+if (fs.existsSync(folderPath)) {
+  if (fs.existsSync(filePath)) {
+    const data = fs.readFileSync(filePath);
+    parsedData = JSON.parse(data);
+  } else {
+    fs.writeFile(filePath, "[]");
+  }
+} else {
+  fs.mkdirSync(folderPath);
+  fs.writeFile(filePath, "[]");
+}
 
 const useSettingsStore = create((set) => ({
   settings: parsedData,

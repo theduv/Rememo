@@ -1,7 +1,10 @@
 import clsx from "clsx";
+import { stat } from "fs";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Star } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
+import useDecksStore from "../../../stores/decks";
 import useSettingsStore from "../../../stores/settings";
 import CardResults from "./CardResults/CardResults";
 
@@ -18,10 +21,29 @@ const NotTypingCard = ({
   deckData,
   setCurrentResults,
 }: NotTypingCardProps) => {
+  const decks = useDecksStore((state: any) => state.decks);
+  const setDecks = useDecksStore((state: any) => state.setDecks);
   const [clickedShow, setClickedShow] = useState(false);
+  const setSomethingChanged = useDecksStore(
+    (state: any) => state.setSomethingChanged
+  );
   const settings = useSettingsStore((state: any) => state.settings);
   const onClickShow = () => {
     setClickedShow(true);
+  };
+
+  const onClickStar = () => {
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck) => deck.id === deckData.id);
+    if (targetDeck) {
+      const targetCard = targetDeck.cards.find(
+        (card: Card) => cardData.id === card.id
+      );
+      console.log(targetCard);
+      targetCard.fav = !targetCard.fav;
+      setDecks(newDecks);
+      setSomethingChanged(true);
+    }
   };
 
   useEffect(() => {
@@ -48,6 +70,9 @@ const NotTypingCard = ({
         )}
         style={{ minWidth: 350 }}
       >
+        <div className="flex justify-end cursor-pointer" onClick={onClickStar}>
+          <Star fill={cardData.fav ? "#FFAC1C" : "none"} />
+        </div>
         <h1 className="m-auto text-3xl text-center">{cardData.front}</h1>
         <div className="border w-full border-gray-300" />
         {clickedShow ? (

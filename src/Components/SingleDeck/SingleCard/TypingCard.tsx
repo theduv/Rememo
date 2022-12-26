@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Star } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 
 interface TypingCardProps {
@@ -30,7 +31,7 @@ const TypingCard = ({
   }, [value, cardData]);
 
   const onChangeInput = (e: any) => {
-const goodLetter = arrayBack[currentKey.current];
+    const goodLetter = arrayBack[currentKey.current];
     const letters = e.target.value.split("");
     const lastLetter = letters[letters.length - 1];
 

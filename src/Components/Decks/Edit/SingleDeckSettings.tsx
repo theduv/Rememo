@@ -41,9 +41,11 @@ const SingleDeckSettings = () => {
         </div>
         <CardsList
           valueSearch={valueSearch}
-          cards={cards.sort((a: Card, b: Card) =>
-            a.front.localeCompare(b.front)
-          )}
+          cards={
+            true
+              ? cards
+              : cards.sort((a: Card, b: Card) => a.front.localeCompare(b.front))
+          }
           setCards={setCards}
           deckData={deckData}
         />

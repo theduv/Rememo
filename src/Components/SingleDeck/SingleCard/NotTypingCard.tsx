@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useSettingsStore from "../../../stores/settings";
@@ -24,14 +24,16 @@ const NotTypingCard = ({
     setClickedShow(true);
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      const key = event.key.toLowerCase();
-      if (key === "w" || key === "s") {
-        setClickedShow(true);
-      }
-    });
+  const kdbHandler = useCallback((event: KeyboardEvent) => {
+    const key = event.key.toLowerCase();
+    if (key === "w" || key === "s") {
+      setClickedShow(true);
+    }
   }, []);
+  useEffect(() => {
+    document.addEventListener("keydown", kdbHandler);
+    return () => document.removeEventListener("keydown", kdbHandler);
+  }, [kdbHandler]);
 
   const onClickResult = () => {
     setCurrentCard((oldCardIndex) => oldCardIndex + 1);

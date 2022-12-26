@@ -26,11 +26,10 @@ const TypingCard = ({
         currentKey.current = 0;
       }, 500);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, cardData]);
+  }, [value, cardData, setCurrentCard]);
 
   const onChangeInput = (e: any) => {
-const goodLetter = arrayBack[currentKey.current];
+    const goodLetter = arrayBack[currentKey.current];
     const letters = e.target.value.split("");
     const lastLetter = letters[letters.length - 1];
 

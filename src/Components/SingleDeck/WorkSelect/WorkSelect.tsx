@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
 import { TbArrowsShuffle } from "react-icons/tb";
 import { BsCardList } from "react-icons/bs";
@@ -28,16 +28,18 @@ const WorkSelect = ({
   const [cardsLearn, setCardsLearn] = useState("all");
   const [count, setCount] = useState(cards.length);
 
-  useEffect(() => {
-    if (cardsLearn === "fav") {
-      setCount(cards.filter((card) => card.fav).length);
-    }
-    if (cardsLearn === "wrong") {
-      setCount(cards.filter((card) => card.lastResult === "wrong").length);
-    }
-    if (cardsLearn === "all") {
-      setCount(cards.length);
-    }
+  const onClickCard = (type: string) => {
+    switch (type) {
+      case "fav":
+        setCount(cards.filter((card) => card.fav).length);
+        break;
+      case "wrong":
+        setCount(cards.filter((card) => card.lastResult === "wrong").length);
+        break;
+      case "all":
+        setCount(cards.length);
+        break;
+    };
     setWorkSelected(
       (oldWork: {
         cards: string;
@@ -51,10 +53,6 @@ const WorkSelect = ({
         reverse,
       })
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typing, reverse, cardsLearn]);
-
-  const onClickCard = (type: string) => {
     setCardsLearn(type);
   };
 

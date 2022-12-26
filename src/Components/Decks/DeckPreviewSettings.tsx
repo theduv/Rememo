@@ -5,7 +5,6 @@ import { Deck } from "../../Interfaces/deck.interface";
 import useDecksStore from "../../stores/decks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useRef, useEffect } from "react";
 import useSettingsStore from "../../stores/settings";
 const fs = window.require("fs");
 
@@ -20,7 +19,6 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
     (state: any) => state.setSomethingChanged
   );
   const settings = useSettingsStore((state: any) => state.settings);
-  const refFile = useRef<HTMLInputElement>(null);
 
   const onClickCross = () => {
     const newDecks = [...decks];
@@ -48,13 +46,6 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
       theme: "dark",
     });
   };
-
-  useEffect(() => {
-    if (refFile.current !== null) {
-      refFile.current.setAttribute("directory", "");
-      refFile.current.setAttribute("webkitdirectory", "");
-    }
-  }, [refFile]);
 
   return (
     <div className="grid grid-cols-3 gap-3 items-center">

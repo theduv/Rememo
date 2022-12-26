@@ -67,7 +67,7 @@ async function setActivity() {
     largeImageText: "rememo",
     instance: false,
     state: null,
-  };
+  } as any;
   if (details.deck !== "undefined") {
     activity.state = details.deck;
   }

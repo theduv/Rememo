@@ -20,7 +20,14 @@ if (fs.existsSync(folderPath)) {
   fs.writeFile(filePath, "[]");
 }
 
-const useDecksStore = create((set) => ({
+interface DecksStoreInterface {
+  somethingChanged: boolean,
+  setSomethingChanged: (value: boolean) => void,
+  decks: Deck[],
+  setDecks: (newValue: Deck[]) => void
+}
+
+const useDecksStore = create<DecksStoreInterface>((set) => ({
   somethingChanged: false,
   setSomethingChanged: (value: boolean) =>
     set((state: { somethingChanged: boolean }) => ({

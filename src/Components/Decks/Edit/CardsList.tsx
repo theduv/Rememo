@@ -1,20 +1,24 @@
 import clsx from "clsx";
 import { Dispatch, Fragment, SetStateAction, useRef, useState } from "react";
 import { Star, Trash } from "react-feather";
+import ReactTooltip from "react-tooltip";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
 import useSettingsStore from "../../../stores/settings";
 import GlobalModal from "../../Shareable/GlobalModal";
+import SingleTag from "./SingleTag";
 
 interface CardsListProps {
   cards: Array<Card>;
   setCards: Dispatch<SetStateAction<Array<Card>>>;
   deckData: Deck;
   valueSearch: string;
+  tagsSearch: Array<string>;
 }
 
 const CardsList = ({
+  tagsSearch,
   cards,
   setCards,
   deckData,
@@ -88,7 +92,6 @@ const CardsList = ({
   };
 
   const onChangeBack = (card: Card, e: any) => {
-    console.log(e.target.value);
     const newDecks = [...decks];
     const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
     const targetCards = targetDeck.cards;
@@ -111,6 +114,30 @@ const CardsList = ({
     return "white";
   };
 
+  const getNextTag = (tag: string | undefined) => {
+    const order = ["P", "O", "G", "B", "W", "R", undefined];
+    if (tag === undefined) {
+      return order[0];
+    }
+    const indexTag = order.findIndex((currentTag) => tag === currentTag);
+
+    if (indexTag < order.length - 1) return order[indexTag + 1];
+    else return order[0];
+  };
+
+  const onClickTag = (cardID: string) => {
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
+    const targetCards = targetDeck.cards;
+    const targetCard = targetCards.find(
+      (curCard: Card) => curCard.id === cardID
+    );
+    targetCard.tag = getNextTag(targetCard.tag);
+    setCards(targetCards);
+    setDecks(newDecks);
+    setSomethingChanged(true);
+  };
+
   return (
     <div
       style={{ minHeight: "69vmin", minWidth: "89vmin", maxWidth: "80%" }}
@@ -118,21 +145,31 @@ const CardsList = ({
     >
       <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-center">
         {cards
-          .filter(
-            (card) =>
-              card.front.toLowerCase().includes(valueSearch.toLowerCase()) ||
-              card.back.toLowerCase().includes(valueSearch.toLowerCase())
-          )
+          .filter((card) => {
+            return (
+              (card.front.toLowerCase().includes(valueSearch.toLowerCase()) ||
+                card.back.toLowerCase().includes(valueSearch.toLowerCase()) ||
+                valueSearch === "") &&
+              (!card.tag || tagsSearch.includes(card.tag))
+            );
+          })
           .map((card) => (
             <Fragment key={card.id}>
-              <input
-                type="text"
-                onChange={(e) => onChangeFront(card, e)}
-                className={clsx("py-1  px-3 rounded-lg", {
-                  "bg-gray-900 text-gray-200": settings.darkMode,
-                })}
-                value={card.front}
-              />
+              <div className="flex space-x-2 items-center">
+                <SingleTag
+                  cardID={card.id}
+                  onClickTag={onClickTag}
+                  tag={card.tag}
+                />
+                <input
+                  type="text"
+                  onChange={(e) => onChangeFront(card, e)}
+                  className={clsx("py-1  px-3 rounded-lg", {
+                    "bg-gray-900 text-gray-200": settings.darkMode,
+                  })}
+                  value={card.front}
+                />
+              </div>
               <div className="flex items-center">
                 <input
                   type="text"
@@ -188,6 +225,7 @@ const CardsList = ({
           </div>
         </div>
       </GlobalModal>
+      <ReactTooltip />
     </div>
   );
 };

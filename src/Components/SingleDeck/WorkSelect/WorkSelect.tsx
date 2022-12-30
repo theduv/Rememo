@@ -5,6 +5,7 @@ import { BsCardList } from "react-icons/bs";
 import SelectButton from "./SelectButton";
 import { FaKeyboard } from "react-icons/fa";
 import { Star, XCircle } from "react-feather";
+import TagsListSearch from "../../Decks/Edit/TagsListSearch";
 interface WorkSelectProps {
   setWorkSelected: Dispatch<
     SetStateAction<{
@@ -12,6 +13,7 @@ interface WorkSelectProps {
       canStart: boolean;
       reverse: boolean;
       typing: boolean;
+      tags: Array<string>;
     }>
   >;
   onClickStartLearn: () => void;
@@ -27,16 +29,36 @@ const WorkSelect = ({
   const [typing, setTyping] = useState(false);
   const [cardsLearn, setCardsLearn] = useState("all");
   const [count, setCount] = useState(cards.length);
+  const [tags, setTags] = useState<Array<string>>([
+    "P",
+    "O",
+    "G",
+    "B",
+    "W",
+    "R",
+  ]);
 
   useEffect(() => {
     if (cardsLearn === "fav") {
-      setCount(cards.filter((card) => card.fav).length);
+      setCount(
+        cards.filter(
+          (card) => card.fav && (tags.includes(card.tag) || !card.tag)
+        ).length
+      );
     }
     if (cardsLearn === "wrong") {
-      setCount(cards.filter((card) => card.lastResult === "wrong").length);
+      setCount(
+        cards.filter(
+          (card) =>
+            card.lastResult === "wrong" &&
+            (tags.includes(card.tag) || !card.tag)
+        ).length
+      );
     }
     if (cardsLearn === "all") {
-      setCount(cards.length);
+      setCount(
+        cards.filter((card) => tags.includes(card.tag) || !card.tag).length
+      );
     }
     setWorkSelected(
       (oldWork: {
@@ -44,15 +66,17 @@ const WorkSelect = ({
         canStart: boolean;
         reverse: boolean;
         typing: boolean;
+        tags: Array<string>;
       }) => ({
         ...oldWork,
         cards: cardsLearn,
         typing,
         reverse,
+        tags: tags,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typing, reverse, cardsLearn]);
+  }, [typing, reverse, cardsLearn, tags]);
 
   const onClickCard = (type: string) => {
     setCardsLearn(type);
@@ -62,6 +86,7 @@ const WorkSelect = ({
     <div className="flex space-y-8 flex-col items-center justify-center text-3xl ">
       <div className="rounded-lg border w-full border-black flex bg-gray-700 flex-col items-center p-4 space-y-6">
         <h1>Cards</h1>
+        <TagsListSearch tags={tags} setTags={setTags} />
         <div className="flex space-x-4">
           <SelectButton
             data="All cards"

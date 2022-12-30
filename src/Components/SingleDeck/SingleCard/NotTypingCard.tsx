@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { stat } from "fs";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Star } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
 import useSettingsStore from "../../../stores/settings";
+import SingleTag from "../../Decks/Edit/SingleTag";
 import CardResults from "./CardResults/CardResults";
 
 interface NotTypingCardProps {
@@ -60,6 +60,8 @@ const NotTypingCard = ({
     setClickedShow(false);
   };
 
+  const onClickTag = () => {};
+
   return (
     <div className="flex flex-col space-y-12 items-center w-full ">
       <div
@@ -70,8 +72,18 @@ const NotTypingCard = ({
         )}
         style={{ minWidth: 350 }}
       >
-        <div className="flex justify-end cursor-pointer" onClick={onClickStar}>
-          <Star fill={cardData.fav ? "#FFAC1C" : "none"} />
+        <div className="flex justify-between">
+          <SingleTag
+            tag={cardData.tag}
+            onClickTag={onClickTag}
+            cardID={cardData.id}
+          />
+          <div
+            className="flex justify-end cursor-pointer"
+            onClick={onClickStar}
+          >
+            <Star fill={cardData.fav ? "#FFAC1C" : "none"} />
+          </div>
         </div>
         <h1 className="m-auto text-3xl text-center">{cardData.front}</h1>
         <div className="border w-full border-gray-300" />

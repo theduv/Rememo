@@ -5,7 +5,6 @@ import NotTypingCard from "./NotTypingCard";
 import TypingCard from "./TypingCard";
 
 interface SingleCardProps {
-  lives: { max: number; left: number };
   setLives: Dispatch<SetStateAction<{ max: number; left: number }>>;
   typing: boolean;
   cardData: Card;
@@ -15,7 +14,6 @@ interface SingleCardProps {
 }
 
 const SingleCard = ({
-  lives,
   setLives,
   typing,
   cardData,

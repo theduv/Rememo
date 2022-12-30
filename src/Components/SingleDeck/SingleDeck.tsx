@@ -12,14 +12,33 @@ import SingleCard from "./SingleCard/SingleCard";
 import WorkSelect from "./WorkSelect/WorkSelect";
 const ipcRenderer = window.require("electron").ipcRenderer;
 
-const getWorkCards = (workSelected: string, cards: Array<Card>) => {
-  if (workSelected === "wrong") {
-    return cards.filter((card) => card.lastResult === "wrong");
+const getWorkCards = (
+  workSelected: {
+    cards: string;
+    canStart: boolean;
+    reverse: boolean;
+    typing: boolean;
+    tags: Array<string>;
+  },
+  cards: Array<Card>
+) => {
+  console.log(workSelected.tags);
+  if (workSelected.cards === "wrong") {
+    return cards.filter(
+      (card) =>
+        card.lastResult === "wrong" &&
+        (workSelected.tags.includes(card.tag) || !card.tag)
+    );
   }
-  if (workSelected === "fav") {
-    return cards.filter((card) => card.fav === true);
+  if (workSelected.cards === "fav") {
+    return cards.filter(
+      (card) =>
+        card.fav === true && (workSelected.tags.includes(card.tag) || !card.tag)
+    );
   }
-  return cards;
+  return cards.filter(
+    (card) => workSelected.tags.includes(card.tag) || !card.tag
+  );
 };
 
 const SingleDeck = () => {
@@ -35,11 +54,18 @@ const SingleDeck = () => {
     right: 0,
     wrong: 0,
   });
-  const [workSelected, setWorkSelected] = useState({
+  const [workSelected, setWorkSelected] = useState<{
+    cards: string;
+    canStart: boolean;
+    reverse: boolean;
+    typing: boolean;
+    tags: Array<string>;
+  }>({
     cards: "none",
     canStart: false,
     reverse: false,
     typing: false,
+    tags: [],
   });
   const [shuffledDeck, setShuffledDeck] = useState(
     deckCards.sort((a, b) => 0.5 - Math.random())
@@ -57,7 +83,7 @@ const SingleDeck = () => {
   }, [workSelected]);
 
   const onClickStartLearn = () => {
-    const targetCards = getWorkCards(workSelected.cards, deckCards);
+    const targetCards = getWorkCards(workSelected, deckCards);
     if (workSelected.reverse) {
       setShuffledDeck(
         targetCards
@@ -74,6 +100,7 @@ const SingleDeck = () => {
         canStart: boolean;
         reverse: boolean;
         typing: boolean;
+        tags: Array<string>;
       }) => ({
         ...oldWork,
         canStart: true,
@@ -83,7 +110,7 @@ const SingleDeck = () => {
 
   useEffect(() => {
     if (currentCard === 0) {
-      const targetCards = getWorkCards(workSelected.cards, deckCards);
+      const targetCards = getWorkCards(workSelected, deckCards);
       setShuffledDeck(targetCards.sort((a, b) => 0.5 - Math.random()));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,7 +138,6 @@ const SingleDeck = () => {
                 {currentCard + 1} / {shuffledDeck.length}
               </div>
               <SingleCard
-                lives={lives}
                 setLives={setLives}
                 setCurrentResults={setCurrentResults}
                 typing={workSelected.typing}

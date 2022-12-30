@@ -4,4 +4,5 @@ export interface Card {
   back: string;
   fav: boolean;
   lastResult: string;
+  tag: string;
 }

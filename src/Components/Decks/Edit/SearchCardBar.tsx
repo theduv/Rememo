@@ -1,14 +1,23 @@
 import clsx from "clsx";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Search } from "react-feather";
 import useSettingsStore from "../../../stores/settings";
+import TagsList from "./TagsList";
+import TagsListSearch from "./TagsListSearch";
 
 interface SearchCardBarProps {
   valueSearch: string;
   setValueSearch: Dispatch<SetStateAction<string>>;
+  tagsSearch: Array<string>;
+  setTagsSearch: Dispatch<SetStateAction<Array<string>>>;
 }
 
-const SearchCardBar = ({ valueSearch, setValueSearch }: SearchCardBarProps) => {
+const SearchCardBar = ({
+  valueSearch,
+  setValueSearch,
+  tagsSearch,
+  setTagsSearch,
+}: SearchCardBarProps) => {
   const settings = useSettingsStore((state: any) => state.settings);
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearch(e.target.value);
@@ -26,6 +35,7 @@ const SearchCardBar = ({ valueSearch, setValueSearch }: SearchCardBarProps) => {
         value={valueSearch}
         onChange={onChangeSearch}
       />
+      <TagsListSearch tags={tagsSearch} setTags={setTagsSearch} />
       <Search className={clsx({ "text-white": settings.darkMode })} />
     </div>
   );

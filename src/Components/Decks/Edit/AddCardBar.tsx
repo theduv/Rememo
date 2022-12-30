@@ -6,6 +6,7 @@ import { Card } from "../../../Interfaces/card.interface";
 import { Deck } from "../../../Interfaces/deck.interface";
 import useDecksStore from "../../../stores/decks";
 import useSettingsStore from "../../../stores/settings";
+import TagsList from "./TagsList";
 
 interface AddCardBarProps {
   setCards: Dispatch<SetStateAction<Array<Card>>>;
@@ -14,6 +15,7 @@ interface AddCardBarProps {
 
 const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
   const [frontValue, setFrontValue] = useState<string>("");
+  const [tag, setTag] = useState<string>("");
   const [backValue, setBackValue] = useState<string>("");
   const setSomethingChanged = useDecksStore(
     (state: any) => state.setSomethingChanged
@@ -28,11 +30,12 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
     const newCards = [
       ...deckData.cards,
       {
-        front: frontValue,
-        back: backValue,
+        front: frontValue.trim(),
+        back: backValue.trim(),
         id: v4(),
         fav: settings.favOnAdd,
         lastResult: "wrong",
+        tag,
       },
     ];
     setCards(newCards);
@@ -76,6 +79,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
         value={backValue}
         onChange={onChangeBackValue}
       />
+      <TagsList tag={tag} setTag={setTag} />
       <Check
         className={clsx("cursor-pointer", { "text-white": settings.darkMode })}
         onClick={onClickCheck}

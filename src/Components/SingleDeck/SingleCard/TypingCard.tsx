@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { Star } from "react-feather";
 import { Card } from "../../../Interfaces/card.interface";
 
 interface TypingCardProps {

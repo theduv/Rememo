@@ -18,6 +18,15 @@ const SingleDeckSettings = () => {
   const settings = useSettingsStore((state: any) => state.settings);
   const deckData = decks.find((deck: Deck) => deck.id === deckID);
   const [valueSearch, setValueSearch] = useState("");
+  const [tagsSearch, setTagsSearch] = useState<Array<string>>([
+    "P",
+    "O",
+    "B",
+    "G",
+    "B",
+    "W",
+    "R",
+  ]);
   const [cards, setCards] = useState<Array<Card>>(deckData.cards);
 
   useEffect(() => {
@@ -36,10 +45,13 @@ const SingleDeckSettings = () => {
           <SearchCardBar
             valueSearch={valueSearch}
             setValueSearch={setValueSearch}
+            tagsSearch={tagsSearch}
+            setTagsSearch={setTagsSearch}
           />
           <AddCardBar setCards={setCards} deckData={deckData} />
         </div>
         <CardsList
+          tagsSearch={tagsSearch}
           valueSearch={valueSearch}
           cards={
             true

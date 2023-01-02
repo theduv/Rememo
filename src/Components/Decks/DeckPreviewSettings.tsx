@@ -34,7 +34,7 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
 
   const handleClickExport = (e: any) => {
     fs.writeFileSync(
-      `${settings.pathExport}${deck.id}.d.json`,
+      `${settings.pathExport}/${deck.id}.d.json`,
       JSON.stringify(deck)
     );
     toast("File successfully exported !", {

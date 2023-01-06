@@ -60,7 +60,31 @@ const NotTypingCard = ({
     setClickedShow(false);
   };
 
-  const onClickTag = () => {};
+  const getNextTag = () => {
+    const order = ["P", "O", "G", "B", "W", "R", undefined];
+    if (cardData.tag === undefined) {
+      return order[0];
+    }
+    const indexTag = order.findIndex(
+      (currentTag) => cardData.tag === currentTag
+    );
+
+    if (indexTag < order.length - 1) return order[indexTag + 1];
+    else return order[0];
+  };
+
+  const onClickTag = (cardID: string) => {
+    const nextTag = getNextTag();
+
+    const newDecks = [...decks];
+    const targetDeck = newDecks.find((deck) => deck.id === deckData.id);
+    const targetCard = targetDeck.cards.find(
+      (card: Card) => card.id === cardData.id
+    );
+    targetCard.tag = nextTag;
+    setDecks(newDecks);
+    setSomethingChanged(true);
+  };
 
   return (
     <div className="flex flex-col space-y-12 items-center w-full ">

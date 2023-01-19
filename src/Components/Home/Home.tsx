@@ -19,7 +19,10 @@ const Home = () => {
       className={clsx(
         "h-full ",
 
-        { "bg-gray-900": settings.darkMode }
+        {
+          "bg-gray-900": settings.theme === "defaultDark",
+          "bg-gwen-purple": settings.theme === "gwen",
+        }
       )}
     >
       <Header title={"Decks list"} />

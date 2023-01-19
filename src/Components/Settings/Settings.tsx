@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useSettingsStore from "../../stores/settings";
 import Header from "../Header/Header";
 import CheckableSetting from "./CheckableSetting";
+import ThemePicker from "./ThemePicker";
 
 const Settings = () => {
   const settings = useSettingsStore((state: any) => state.settings);
@@ -26,25 +27,29 @@ const Settings = () => {
   return (
     <div
       className={clsx("h-full", {
-        "bg-gray-900 text-gray-200": settings.darkMode,
+        "bg-gwen-black text-gray-200": settings.theme === "gwen",
+        "bg-gray-900 text-gray-200": settings.theme === "defaultDark",
       })}
     >
       <Header title={"Settings"} />
-      <div className="p-12">
+      <div className="p-12 flex flex-col space-y-4">
         <CheckableSetting
           content="Fav card on create"
           isChecked={settings.favOnAdd}
           onChange={onChangeFavOnAdd}
         />
-      </div>
-      <div className="px-12 flex items-center space-x-4">
-        <h1 className="text-xl">Export path</h1>
-        <input
-          value={valueExport}
-          onChange={onChangeValueExport}
-          type="text"
-          className="rounded-lg p-1 border bg-gray-500 text-gray"
-        />
+        <div>
+          <ThemePicker />
+        </div>
+        <div className="flex items-center space-x-4">
+          <h1 className="text-xl">Export path</h1>
+          <input
+            value={valueExport}
+            onChange={onChangeValueExport}
+            type="text"
+            className="rounded-lg p-1 border bg-gray-500 text-gray"
+          />
+        </div>
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ const NotTypingCard = ({
     else return order[0];
   };
 
-  const onClickTag = (cardID: string) => {
+  const onClickTag = () => {
     const nextTag = getNextTag();
 
     const newDecks = [...decks];

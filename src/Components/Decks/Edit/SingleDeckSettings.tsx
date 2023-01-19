@@ -38,7 +38,12 @@ const SingleDeckSettings = () => {
   }, []);
 
   return (
-    <div className={clsx("h-full", { "bg-gray-900": settings.darkMode })}>
+    <div
+      className={clsx("h-full", {
+        "bg-gray-900": settings.theme === "defaultDark",
+        "bg-gwen-purple": settings.theme === "gwen",
+      })}
+    >
       <Header title={`Edit ${deckData.name}`} />
       <div className="flex flex-col space-y-4 h-4/5 items-center justify-center">
         <div className="flex flex-col items-center justify-center space-y-4 h-full ">

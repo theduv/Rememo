@@ -22,7 +22,8 @@ const Decks = () => {
   return (
     <div
       className={clsx("h-full", {
-        "bg-gray-900 text-gray-200": settings.darkMode,
+        "bg-gray-900 text-gray-200": settings.theme === "defaultDark",
+        "bg-gwen-purple text-gwen-white": settings.theme === "gwen",
       })}
     >
       <Header title={"Decks list"} />

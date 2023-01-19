@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useRef, useEffect } from "react";
 import useSettingsStore from "../../stores/settings";
+import clsx from "clsx";
 const fs = window.require("fs");
 
 interface DeckPreviewSettingsProps {
@@ -59,20 +60,30 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
   return (
     <div className="grid grid-cols-3 gap-3 items-center">
       <Link to={`/decks/edit/${deck.id}`}>
-        <h1 className="text-blue-400 italic font-bold cursor-pointer">
+        <h1
+          className={clsx("text-blue-400 italic font-bold cursor-pointer", {
+            "text-gwen-pink": settings.theme === "gwen",
+          })}
+        >
           {deck.name}
         </h1>
       </Link>
-      <h1 className="text-sm">
+      <h1
+        className={clsx("text-sm", {
+          "text-gwen-black": settings.theme === "gwen",
+        })}
+      >
         {deck.cards.length} card{deck.cards.length > 1 ? "s" : ""}
       </h1>
-      <div className="flex space-x-2 items-center ">
+      <div className="flex space-x-2 items-center">
         <XCircle
           className="text-gray-400 cursor-pointer"
+          color={"black"}
           onClick={onClickCross}
         />
         <BiExport
           onClick={handleClickExport}
+          color={"black"}
           className="text-2xl cursor-pointer text-gray-400"
         />
       </div>

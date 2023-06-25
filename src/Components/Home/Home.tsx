@@ -16,14 +16,10 @@ const Home = () => {
 
   return (
     <div
-      className={clsx(
-        "h-full ",
-
-        {
-          "bg-gray-900": settings.theme === "defaultDark",
-          "bg-gwen-purple": settings.theme === "gwen",
-        }
-      )}
+      className={clsx("h-full ", {
+        "bg-gray-900": settings.theme === "defaultDark",
+        "bg-gwen-purple": settings.theme === "gwen",
+      })}
     >
       <Header title={"Decks list"} />
       <div

@@ -3,15 +3,10 @@ import { Card } from "../../../Interfaces/card.interface";
 
 interface TypingCardProps {
   cardData: Card;
-  setLives: Dispatch<SetStateAction<{ max: number; left: number }>>;
   setCurrentCard: Dispatch<SetStateAction<number>>;
 }
 
-const TypingCard = ({
-  cardData,
-  setCurrentCard,
-  setLives,
-}: TypingCardProps) => {
+const TypingCard = ({ cardData, setCurrentCard }: TypingCardProps) => {
   const [arrayBack, setArrayBack] = useState(cardData.back.split(""));
   const [value, setValue] = useState("");
   const currentKey = useRef(0);
@@ -43,7 +38,6 @@ const TypingCard = ({
       const oldValue = value;
       setValue(e.target.value.toUpperCase());
       setTimeout(() => {
-        setLives((oldLives) => ({ ...oldLives, left: oldLives.left - 1 }));
         setValue(oldValue);
         processing.current = false;
       }, 500);

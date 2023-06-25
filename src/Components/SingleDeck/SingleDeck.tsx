@@ -42,7 +42,6 @@ const getWorkCards = (
 
 const SingleDeck = () => {
   const params = useParams();
-  const [lives, setLives] = useState({ max: 3, left: 3 });
   const decks = useDecksStore((state: any) => state.decks);
   const [startTime, setStartTime] = useState(new Date());
   const deckID = params.id;
@@ -137,7 +136,6 @@ const SingleDeck = () => {
                 {currentCard + 1} / {shuffledDeck.length}
               </div>
               <SingleCard
-                setLives={setLives}
                 setCurrentResults={setCurrentResults}
                 typing={workSelected.typing}
                 deckData={deckData}

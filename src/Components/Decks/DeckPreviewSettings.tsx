@@ -78,12 +78,12 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
       <div className="flex space-x-2 items-center">
         <XCircle
           className="text-gray-400 cursor-pointer"
-          color={"black"}
+          color={"white"}
           onClick={onClickCross}
         />
         <BiExport
           onClick={handleClickExport}
-          color={"black"}
+          color={"white"}
           className="text-2xl cursor-pointer text-gray-400"
         />
       </div>

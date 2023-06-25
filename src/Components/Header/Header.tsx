@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Book, Moon, Settings, Sun } from "react-feather";
+import { Book, Settings } from "react-feather";
 import { Link } from "react-router-dom";
 import useSettingsStore from "../../stores/settings";
 import SaveChanges from "./SaveChanges";

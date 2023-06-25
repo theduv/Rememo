@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Search } from "react-feather";
 import useSettingsStore from "../../../stores/settings";
-import TagsList from "./TagsList";
 import TagsListSearch from "./TagsListSearch";
 
 interface SearchCardBarProps {

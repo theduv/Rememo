@@ -4,7 +4,6 @@ const isDev = require("electron-is-dev");
 const discordRPC = require("discord-rpc");
 
 const clientId = "1038474817256562778";
-console.log("loading");
 
 let win;
 let details = { title: "Main menu", deck: "undefined" };

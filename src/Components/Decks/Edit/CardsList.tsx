@@ -164,7 +164,7 @@ const CardsList = ({
                 <input
                   type="text"
                   onChange={(e) => onChangeFront(card, e)}
-                  className={clsx("py-1  px-3 rounded-lg", {
+                  className={clsx("py-1  px-3 rounded-lg w-full", {
                     "bg-gray-900 text-gray-200": settings.darkMode,
                   })}
                   value={card.front}

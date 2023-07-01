@@ -80,6 +80,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
         onChange={onChangeBackValue}
       />
       <TagsList tag={tag} setTag={setTag} />
+      <button className="text-gray-200">Add image</button>
       <Check
         className={clsx("cursor-pointer", { "text-white": settings.darkMode })}
         onClick={onClickCheck}

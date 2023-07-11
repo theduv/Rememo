@@ -24,6 +24,11 @@ const Settings = () => {
     setSomethingChanged(true);
   };
 
+  const onChangeDiscordRP = (event: React.ChangeEvent) => {
+    setSettings({ ...settings, discordRP: !settings.discordRP });
+    setSomethingChanged(true);
+  };
+
   return (
     <div
       className={clsx("h-full", {
@@ -37,6 +42,11 @@ const Settings = () => {
           content="Fav card on create"
           isChecked={settings.favOnAdd}
           onChange={onChangeFavOnAdd}
+        />
+        <CheckableSetting
+          content="Disable Discord RP"
+          isChecked={settings.discordRP}
+          onChange={onChangeDiscordRP}
         />
         <div>
           <ThemePicker />

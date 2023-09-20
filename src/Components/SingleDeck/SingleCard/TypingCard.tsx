@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
 
@@ -45,7 +46,11 @@ const TypingCard = ({ cardData, setCurrentCard }: TypingCardProps) => {
   };
 
   return (
-    <div className="flex space-y-8 flex-col items-center justify-center h-full mt-32">
+    <div
+      className={clsx(
+        "flex space-y-8 flex-col items-center justify-center h-full mt-32"
+      )}
+    >
       <h1 className="text-6xl">{cardData.front}</h1>
       <div>
         <input

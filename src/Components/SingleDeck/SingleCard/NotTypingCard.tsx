@@ -46,19 +46,46 @@ const NotTypingCard = ({
     }
   };
 
+  const onClickAnswer = (succeeded: boolean) => {
+    if (succeeded) {
+      setCurrentResults((oldResults) => ({
+        ...oldResults,
+        right: oldResults.right + 1,
+      }));
+    } else {
+      setCurrentResults((oldResults) => ({
+        ...oldResults,
+        wrong: oldResults.wrong + 1,
+      }));
+    }
+
+    const newDecks = [...decks];
+
+    const targetDeck = newDecks.find((deck: Deck) => deck.id === deckData.id);
+    const targetCard = targetDeck.cards.find(
+      (card: Deck) => card.id === cardData.id
+    );
+    targetCard.lastResult = succeeded;
+    setDecks(newDecks);
+    setSomethingChanged(true);
+    setCurrentCard((oldCardIndex) => oldCardIndex + 1);
+    setClickedShow(false);
+  };
+
   useEffect(() => {
     document.addEventListener("keydown", (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
       if (key === "w" || key === "s") {
         setClickedShow(true);
       }
+      if (key === "d" && clickedShow) {
+        onClickAnswer(true);
+      }
+      if (key === "a" && clickedShow) {
+        onClickAnswer(false);
+      }
     });
   }, []);
-
-  const onClickResult = () => {
-    setCurrentCard((oldCardIndex) => oldCardIndex + 1);
-    setClickedShow(false);
-  };
 
   const getNextTag = () => {
     const order = ["P", "O", "G", "B", "W", "R", undefined];
@@ -87,7 +114,7 @@ const NotTypingCard = ({
   };
 
   return (
-    <div className="flex flex-col space-y-12 items-center w-full ">
+    <div className="flex flex-col space-y-12 items-center w-full">
       <div
         className={clsx(
           "border-2 border-gray-400 rounded-lg p-6 w-1/5 flex flex-col justify-between h-96",
@@ -119,13 +146,7 @@ const NotTypingCard = ({
           </button>
         )}
       </div>
-      <CardResults
-        setCurrentResults={setCurrentResults}
-        onClickResult={onClickResult}
-        clickedShow={clickedShow}
-        deckData={deckData}
-        cardData={cardData}
-      />
+      <CardResults onClickAnswer={onClickAnswer} />
     </div>
   );
 };

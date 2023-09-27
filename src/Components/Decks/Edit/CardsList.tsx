@@ -140,7 +140,7 @@ const CardsList = ({
 
   return (
     <div
-      style={{ minHeight: "69vmin", minWidth: "89vmin", maxWidth: "80%" }}
+      style={{ minHeight: 520, minWidth: 800, maxWidth: "80%" }}
       className="p-6 border border-gray-600 rounded-lg justify-center mt-8 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-500"
     >
       <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-center">
@@ -164,7 +164,7 @@ const CardsList = ({
                 <input
                   type="text"
                   onChange={(e) => onChangeFront(card, e)}
-                  className={clsx("py-1  px-3 rounded-lg", {
+                  className={clsx("py-1  px-3 rounded-lg w-full", {
                     "bg-gray-900 text-gray-200": settings.darkMode,
                   })}
                   value={card.front}

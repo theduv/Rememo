@@ -2,6 +2,23 @@ const path = require("path");
 const { app, BrowserWindow, ipcMain } = require("electron");
 const isDev = require("electron-is-dev");
 const discordRPC = require("discord-rpc");
+let appData = require("app-data-folder");
+const folderPath = appData("Rememo");
+const fs = require("fs");
+const filePath = folderPath + "/settings.json";
+let settings = { discordRP: false };
+
+if (fs.existsSync(folderPath)) {
+  if (fs.existsSync(filePath)) {
+    const data = fs.readFileSync(filePath);
+    settings = JSON.parse(data);
+  } else {
+    fs.writeFile(filePath, "[]");
+  }
+} else {
+  fs.mkdirSync(folderPath);
+  fs.writeFile(filePath, "[]");
+}
 
 const clientId = "1038474817256562778";
 
@@ -53,34 +70,36 @@ app.on("activate", () => {
 
 const startTimestamp = Date.now();
 
-const rpc = new discordRPC.Client({ transport: "ipc" });
+if (settings.discordRP) {
+  const rpc = new discordRPC.Client({ transport: "ipc" });
 
-async function setActivity() {
-  if (!rpc || !win) {
-    return;
+  async function setActivity() {
+    if (!rpc || !win) {
+      return;
+    }
+    let activity = {
+      details: details.title,
+      startTimestamp,
+      largeImageKey: "rememo",
+      largeImageText: "rememo",
+      instance: false,
+      state: null,
+    };
+    if (details.deck !== "undefined") {
+      activity.state = details.deck;
+    }
+
+    rpc.setActivity(activity);
   }
-  let activity = {
-    details: details.title,
-    startTimestamp,
-    largeImageKey: "rememo",
-    largeImageText: "rememo",
-    instance: false,
-    state: null,
-  };
-  if (details.deck !== "undefined") {
-    activity.state = details.deck;
-  }
 
-  rpc.setActivity(activity);
-}
-
-rpc.on("ready", () => {
-  setActivity();
-
-  // activity can only be set every 15 seconds
-  setInterval(() => {
+  rpc.on("ready", () => {
     setActivity();
-  }, 15e3);
-});
 
-rpc.login({ clientId }).catch(console.error);
+    // activity can only be set every 15 seconds
+    setInterval(() => {
+      setActivity();
+    }, 15e3);
+  });
+
+  rpc.login({ clientId }).catch(console.error);
+}

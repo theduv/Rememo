@@ -36,6 +36,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
         fav: settings.favOnAdd,
         lastResult: "wrong",
         tag,
+        attachments: [],
       },
     ];
     setCards(newCards);
@@ -81,6 +82,7 @@ const AddCardBar = ({ setCards, deckData }: AddCardBarProps) => {
       />
       <TagsList tag={tag} setTag={setTag} />
       <button className="text-gray-200">Add image</button>
+      <input type="file" accept=".png" />
       <Check
         className={clsx("cursor-pointer", { "text-white": settings.darkMode })}
         onClick={onClickCheck}

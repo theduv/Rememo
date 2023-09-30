@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Card } from "../../../Interfaces/card.interface";
+import CardAttachments from "./CardAttachments";
 
 interface TypingCardProps {
   cardData: Card;
@@ -52,6 +53,7 @@ const TypingCard = ({ cardData, setCurrentCard }: TypingCardProps) => {
       )}
     >
       <h1 className="text-6xl">{cardData.front}</h1>
+      <CardAttachments attachments={cardData.attachments} />
       <div>
         <input
           type="text"

@@ -5,4 +5,5 @@ export interface Card {
   fav: boolean;
   lastResult: string;
   tag: string;
+  attachments: any[];
 }

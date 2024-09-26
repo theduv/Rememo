@@ -33,7 +33,7 @@ const DeckPreviewSettings = ({ deck }: DeckPreviewSettingsProps) => {
     setSomethingChanged(true);
   };
 
-  const handleClickExport = (e: any) => {
+  const handleClickExport = () => {
     fs.writeFileSync(
       `${settings.pathExport}/${deck.id}.d.json`,
       JSON.stringify(deck)

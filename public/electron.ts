@@ -13,7 +13,7 @@ if (fs.existsSync(folderPath)) {
     const data = fs.readFileSync(filePath);
     settings = JSON.parse(data);
   } else {
-    fs.writeFile(filePath, "[]");
+    fs.writeFileSync(filePath, "[]");
   }
 } else {
   fs.mkdirSync(folderPath);

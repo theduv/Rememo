@@ -7,7 +7,7 @@ const DecksList = () => {
   const decks = useDecksStore((state: any) => state.decks);
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-4">
+    <div className="flex flex-col justify-center items-center space-y-4 text-gray-200">
       {decks.length ? (
         decks.map((deck: Deck) => <DeckPreview key={deck.id} deck={deck} />)
       ) : (

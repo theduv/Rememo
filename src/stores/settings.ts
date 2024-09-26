@@ -1,4 +1,4 @@
-import create from "zustand";
+import {create} from "zustand";
 import { Deck } from "../Interfaces/deck.interface";
 const fs = window.require("fs");
 let appData = window.require("app-data-folder");
@@ -13,11 +13,11 @@ if (fs.existsSync(folderPath)) {
     const data = fs.readFileSync(filePath);
     parsedData = JSON.parse(data);
   } else {
-    fs.writeFile(filePath, "[]");
+    fs.writeFileSync(filePath, "[]");
   }
 } else {
   fs.mkdirSync(folderPath);
-  fs.writeFile(filePath, "[]");
+  fs.writeFileSync(filePath, "[]");
 }
 
 const useSettingsStore = create((set) => ({
